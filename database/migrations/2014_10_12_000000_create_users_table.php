@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('country')->nullable();
             $table->char('gender')->nullable();
             $table->string('affiliation');
-            $table->string('lines_of_reserch');
+            $table->string('lines_of_research');
             $table->string('avatar')->default('avatar.jpg');
             $table->rememberToken();
             $table->timestamps();

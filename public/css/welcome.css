@@ -6,13 +6,14 @@ body{
 
 .top-header{
     height: 10%;
-    background-color: #1b1e21;
 }
 
-.header-text{
+.main-text{
     text-transform: uppercase;
-    color: #FFFFFF;
+    color: #000000;
 }
+
+
 
 
 
