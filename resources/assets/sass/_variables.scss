@@ -1,8 +1,24 @@
-
 // Body
-$body-bg: #f5f8fa;
+$body-bg: #FFFFFF;
 
 // Typography
-$font-family-sans-serif: "Raleway", sans-serif;
+$font-family-sans-serif: "Lato", sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
+
+$navbar-light-color: #2e3532;
+$navbar-light-hover-color: #00adb5;
+
+$input-box-shadow: none;
+$input-focus-box-shadow: none;
+
+$sizes: (
+        10: 10%,
+        80 : 80%,
+        90 : 90%
+)
+
+
+
+
+
