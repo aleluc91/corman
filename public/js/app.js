@@ -23952,7 +23952,7 @@ if (token) {
      * @returns {Function} Returns the new restricted function.
      * @example
      *
-     * var saves = ['profile', 'settings'];
+     * var saves = ['users', 'settings'];
      *
      * var done = _.after(saves.length, function() {
      *   console.log('done saving!');
