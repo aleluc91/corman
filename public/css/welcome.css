@@ -1,17 +1,23 @@
 
-html,
+/*html,
 body{
-    height: 100%;
-}
-
-.top-header{
-    height: 10%;
-}
-
 .main-text{
     text-transform: uppercase;
     color: #000000;
+}    height: 100vh;
+    margin: 0;
 }
+
+header{
+    height: 10vh;
+}
+
+.main-content{
+    overflow: auto;
+    height: 90vh;
+}*/
+
+
 
 
 

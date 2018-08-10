@@ -12,6 +12,26 @@
   background-color: #FFFFFF;
 }*/
 
+html,
+body{
+  height : 100vh;
+  margin: 0;
+}
+
+header{
+  height: 10vh;
+}
+
+.main-content{
+  height: 90vh;
+  overflow: auto;
+}
+
+.main-text{
+  text-transform: uppercase;
+  color: #000000;
+}
+
 .nav-item-light{
   text-transform: uppercase;
   font-weight: 700;

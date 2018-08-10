@@ -24,12 +24,14 @@
     <div class="app">
         @include('includes.navbar')
 
-        <main class="container my-4" style="min-height: 100%">
-            @yield('content')
-        </main>
+        <div class="main-content">
+            <main class="container py-2 h-90" style="min-height: 100%">
+                @yield('content')
+            </main>
 
 
-        @include('includes.footer')
+            @include('includes.footer')
+        </div>
     </div>
 </body>
 </html>

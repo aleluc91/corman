@@ -1,5 +1,5 @@
 
-
+<header>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow rounded">
         <div class="container">
             @guest
@@ -60,3 +60,4 @@
             </div>
         </div>
     </nav>
+</header>
