@@ -1,6 +1,6 @@
 
 <header>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow rounded">
+    <nav class="navbar navbar-expand-md navbar-light bg-white shadow">
         <div class="container">
             @guest
             <a class="navbar-brand" style="text-transform: uppercase ; font-weight: 700;" href="{{ url('/') }}">
@@ -35,7 +35,7 @@
                             </form>
                         </li>
                     @else
-                        <li class="nav-item dropdown">
+                        <li class="nav-item text-dark dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}  {{Auth::user()->last_name}}<span class="caret"></span>
