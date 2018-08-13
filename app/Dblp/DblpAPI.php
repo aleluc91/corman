@@ -29,7 +29,7 @@ class DblpAPI
             $doi = $hit['info']['doi'];
             $ee = $hit['info']['ee'];
             $url = $hit['info']['url'];
-            $publication = new DblpPublication($id , $title , $venue , $pages , $year , $type , $key , $doi , $ee , $url);
+            $publication = new DblpPublication($id , $title , $year , $type , $key , $doi , $ee , $url);
             array_push($publicationList , $publication);
         }
         var_dump($publicationList);

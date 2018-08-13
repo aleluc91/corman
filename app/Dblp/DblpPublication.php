@@ -13,8 +13,6 @@ class DblpPublication
 {
     private $id;
     private $title;
-    private $venue;
-    private $pages;
     private $year;
     private $type;
     private $key;
@@ -35,12 +33,10 @@ class DblpPublication
      * @param $ee
      * @param $url
      */
-    public function __construct($id, $title, $venue, $pages, $year, $type, $key, $doi, $ee, $url)
+    public function __construct($id, $title, $year, $type, $key, $doi, $ee, $url)
     {
         $this->id = $id;
         $this->title = $title;
-        $this->venue = $venue;
-        $this->pages = $pages;
         $this->year = $year;
         $this->type = $type;
         $this->key = $key;
@@ -63,22 +59,6 @@ class DblpPublication
     public function getTitle()
     {
         return $this->title;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getVenue()
-    {
-        return $this->venue;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPages()
-    {
-        return $this->pages;
     }
 
     /**
