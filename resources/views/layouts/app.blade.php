@@ -11,7 +11,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    @stack('scripts')
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -19,19 +20,18 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @stack('styles')
 </head>
 <body>
-    <div class="app">
+    <div class="main-wrapper">
         @include('includes.navbar')
 
-        <div class="main-content">
             <main class="container py-2 h-90" style="min-height: 100%">
                 @yield('content')
             </main>
 
 
             @include('includes.footer')
-        </div>
     </div>
 </body>
 </html>

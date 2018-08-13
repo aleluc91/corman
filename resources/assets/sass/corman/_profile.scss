@@ -1,0 +1,22 @@
+.user-profile{
+
+  .avatar{
+    display: block;
+    height: 150px;
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  ul{
+    list-style: none;
+    padding: 0;
+
+    li{
+      padding: 0.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+  }
+}
+

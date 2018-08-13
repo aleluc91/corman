@@ -1,6 +1,5 @@
 
-<header>
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow">
+    <nav class="navbar navbar-expand-md navbar-light bg-white shadow h-10">
         <div class="container">
             @guest
             <a class="navbar-brand" style="text-transform: uppercase ; font-weight: 700;" href="{{ url('/') }}">
@@ -42,7 +41,7 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a href="{{ route('users.profile') }}" class="dropdown-item">Profile</a>
+                                <a href="{{ route('users.index') }}" class="dropdown-item">Profile</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -60,4 +59,3 @@
             </div>
         </div>
     </nav>
-</header>

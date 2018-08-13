@@ -10495,9 +10495,73 @@ a.text-dark:focus {
   }
 }
 
-/*.navbar-laravel {
-  background-color: #FFFFFF;
-}*/
+.profile-card {
+  border: 1px solid #000;
+}
+
+.profile-card .profile-card-header {
+  height: 250px;
+  padding: 0;
+}
+
+.profile-card .profile-card-header img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.profile-card .profile-card-body {
+  position: relative;
+  top: -80px;
+  margin-bottom: -80px;
+  padding: 0;
+}
+
+.profile-card .profile-card-body .avatar {
+  display: block;
+  max-width: 150px;
+  max-height: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+}
+
+.profile-card .profile-card-body .profile-data {
+  padding: 5%;
+}
+
+.profile-card .profile-card-body .profile-data h2 {
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.profile-card .profile-card-body .profile-data ul {
+  list-style: none;
+  padding: 0;
+}
+
+.profile-card .profile-card-body .profile-data ul li {
+  margin-bottom: 2px;
+}
+
+.user-profile .avatar {
+  display: block;
+  height: 150px;
+  width: 150px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.user-profile ul {
+  list-style: none;
+  padding: 0;
+}
+
+.user-profile ul li {
+  padding: 0.3rem;
+  margin-bottom: 0.5rem;
+}
 
 html,
 body {
@@ -10505,9 +10569,14 @@ body {
   margin: 0;
 }
 
-header {
-  height: 10vh;
+.main-wrapper {
+  height: 100%;
+  overflow: scroll;
 }
+
+/*.navbar-laravel {
+  background-color: #FFFFFF;
+}*/
 
 .main-content {
   height: 90vh;
@@ -10523,46 +10592,5 @@ header {
   text-transform: uppercase;
   font-weight: 700;
   border-bottom: 1px solid #00adb5;
-}
-
-.profile-card {
-  width: 300px;
-  height: auto;
-  border: 1px solid #000;
-}
-
-.profile-card .profile-card-header {
-  width: 100%;
-  height: 150px;
-  padding: 0;
-}
-
-.profile-card .profile-card-header img {
-  width: 100%;
-  height: 100%;
-}
-
-.profile-card .profile-card-body {
-  position: relative;
-  top: -50px;
-}
-
-.profile-card .profile-card-body .avatar {
-  display: block;
-  width: 50%;
-  height: 100px;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 50%;
-  margin-bottom: 2px;
-}
-
-.profile-card .profile-card-body ul {
-  list-style: none;
-  padding: 0;
-}
-
-.profile-card .profile-card-body ul li {
-  margin-bottom: 2px;
 }
 
