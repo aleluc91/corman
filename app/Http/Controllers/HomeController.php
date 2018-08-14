@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\DblpAPI;
+use App\Dblp\DblpAPI;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller

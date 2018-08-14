@@ -6,13 +6,18 @@
  * Time: 17:49
  */
 
-namespace App;
+namespace App\Dblp;
 
 
 class DblpPublication
 {
     private $id;
     private $title;
+    private $authors;
+    private $venue;
+    private $pages;
+    private $publisher;
+    private $number;
     private $year;
     private $type;
     private $key;
@@ -20,29 +25,8 @@ class DblpPublication
     private $ee;
     private $url;
 
-    /**
-     * DblpPublication constructor.
-     * @param $id
-     * @param $title
-     * @param $venue
-     * @param $pages
-     * @param $year
-     * @param $type
-     * @param $key
-     * @param $doi
-     * @param $ee
-     * @param $url
-     */
-    public function __construct($id, $title, $year, $type, $key, $doi, $ee, $url)
-    {
-        $this->id = $id;
-        $this->title = $title;
-        $this->year = $year;
-        $this->type = $type;
-        $this->key = $key;
-        $this->doi = $doi;
-        $this->ee = $ee;
-        $this->url = $url;
+    public function __construct(){
+
     }
 
     /**
@@ -54,11 +38,107 @@ class DblpPublication
     }
 
     /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
      * @return mixed
      */
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * @param mixed $title
+     */
+    public function setTitle($title): void
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthors()
+    {
+        return $this->authors;
+    }
+
+    /**
+     * @param mixed $authors
+     */
+    public function setAuthors($authors): void
+    {
+        $this->authors = $authors;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVenue()
+    {
+        return $this->venue;
+    }
+
+    /**
+     * @param mixed $venue
+     */
+    public function setVenue($venue): void
+    {
+        $this->venue = $venue;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPages()
+    {
+        return $this->pages;
+    }
+
+    /**
+     * @param mixed $pages
+     */
+    public function setPages($pages): void
+    {
+        $this->pages = $pages;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPublisher()
+    {
+        return $this->publisher;
+    }
+
+    /**
+     * @param mixed $publisher
+     */
+    public function setPublisher($publisher): void
+    {
+        $this->publisher = $publisher;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNumber()
+    {
+        return $this->number;
+    }
+
+    /**
+     * @param mixed $number
+     */
+    public function setNumber($number): void
+    {
+        $this->number = $number;
     }
 
     /**
@@ -70,11 +150,27 @@ class DblpPublication
     }
 
     /**
+     * @param mixed $year
+     */
+    public function setYear($year): void
+    {
+        $this->year = $year;
+    }
+
+    /**
      * @return mixed
      */
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type): void
+    {
+        $this->type = $type;
     }
 
     /**
@@ -86,11 +182,27 @@ class DblpPublication
     }
 
     /**
+     * @param mixed $key
+     */
+    public function setKey($key): void
+    {
+        $this->key = $key;
+    }
+
+    /**
      * @return mixed
      */
     public function getDoi()
     {
         return $this->doi;
+    }
+
+    /**
+     * @param mixed $doi
+     */
+    public function setDoi($doi): void
+    {
+        $this->doi = $doi;
     }
 
     /**
@@ -102,6 +214,14 @@ class DblpPublication
     }
 
     /**
+     * @param mixed $ee
+     */
+    public function setEe($ee): void
+    {
+        $this->ee = $ee;
+    }
+
+    /**
      * @return mixed
      */
     public function getUrl()
@@ -109,7 +229,13 @@ class DblpPublication
         return $this->url;
     }
 
-
+    /**
+     * @param mixed $url
+     */
+    public function setUrl($url): void
+    {
+        $this->url = $url;
+    }
 
 
 }
