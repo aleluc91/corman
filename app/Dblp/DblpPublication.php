@@ -15,9 +15,10 @@ class DblpPublication
     private $title;
     private $authors;
     private $venue;
-    private $pages;
-    private $publisher;
+    private $volume;
     private $number;
+    private $publisher;
+    private $pages;
     private $year;
     private $type;
     private $key;
@@ -96,17 +97,33 @@ class DblpPublication
     /**
      * @return mixed
      */
-    public function getPages()
+    public function getVolume()
     {
-        return $this->pages;
+        return $this->volume;
     }
 
     /**
-     * @param mixed $pages
+     * @param mixed $volume
      */
-    public function setPages($pages): void
+    public function setVolume($volume): void
     {
-        $this->pages = $pages;
+        $this->volume = $volume;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNumber()
+    {
+        return $this->number;
+    }
+
+    /**
+     * @param mixed $number
+     */
+    public function setNumber($number): void
+    {
+        $this->number = $number;
     }
 
     /**
@@ -128,17 +145,17 @@ class DblpPublication
     /**
      * @return mixed
      */
-    public function getNumber()
+    public function getPages()
     {
-        return $this->number;
+        return $this->pages;
     }
 
     /**
-     * @param mixed $number
+     * @param mixed $pages
      */
-    public function setNumber($number): void
+    public function setPages($pages): void
     {
-        $this->number = $number;
+        $this->pages = $pages;
     }
 
     /**
@@ -236,6 +253,8 @@ class DblpPublication
     {
         $this->url = $url;
     }
+
+
 
 
 }
