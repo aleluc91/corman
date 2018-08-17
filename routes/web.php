@@ -21,3 +21,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/users/index' , 'UsersProfileController@index')->name('users.index');
 Route::patch('/users/{user}' , 'UsersProfileController@update')->name('users.update');
+
+Route::post('/dblp/store' , 'DblpPublicationController')->name("dblp.store");

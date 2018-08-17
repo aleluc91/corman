@@ -15,8 +15,8 @@ class CreatePublicationsTable extends Migration
     {
         Schema::create('publications', function (Blueprint $table) {
             $table->increments('id');
-            $table->bigInteger('dblp_id')->nullable();
-            $table->text('title');
+            $table->string('dblp_id')->nullable();
+            $table->string('title');
             $table->string('venue');
             $table->string('publisher')->nullable();
             $table->integer('volume')->nullable();
@@ -25,7 +25,7 @@ class CreatePublicationsTable extends Migration
             $table->year('year');
             $table->string('type');
             $table->string('key');
-            $table->string('doi');
+            $table->string('doi')->nullable();
             $table->string('ee');
             $table->string('url');
             $table->timestamps();

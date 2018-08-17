@@ -25,6 +25,7 @@ class HomeController extends Controller
     public function index()
     {
         DblpAPI::getAllPublications('Giuseppe' , 'Desolda');
+        DblpAPI::getAuthorId("Maria Francesca Costabile");
         return view('home');
     }
 }

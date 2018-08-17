@@ -33,7 +33,7 @@ class DblpPublication
     /**
      * @return mixed
      */
-    public function getId()
+    public function getId() : string
     {
         return $this->id;
     }
@@ -254,7 +254,22 @@ class DblpPublication
         $this->url = $url;
     }
 
-
-
+    public function toArray() : array{
+        return array(
+            'dblp_id' => $this->id,
+            'title' => $this->title,
+            'venue' => $this->venue,
+            'volume' => $this->volume,
+            'number' => $this->number,
+            'publisher' => $this->publisher,
+            'pages' => $this->pages,
+            'year' => $this->year,
+            'type' => $this->type,
+            'key' => $this->key,
+            'doi' => $this->doi,
+            'ee' => $this->ee,
+            'url' => $this->url
+        );
+    }
 
 }
