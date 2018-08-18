@@ -14,9 +14,12 @@ use App\Dblp\DblpPublication;
 class DblpAPI
 {
 
-    public static function getAllPublications(string $authorName, string $authorSurname)
+    public static function getAllPublications(string $authorName, string $authorLastName)
     {
-        $url = "http://dblp.org/search/publ/api?q={$authorName}_{$authorSurname}&format=json&h=100";
+        $authorName = self::formatData($authorName);
+        $authorLastName = self::formatData($authorLastName);
+        $url = "http://dblp.org/search/publ/api?q={$authorName}_{$authorLastName}&format=json&h=1000";
+        var_dump($url);
         $jsonPublications = file_get_contents($url);
         $publications = json_decode($jsonPublications, true);
         $publicationList = array();
@@ -33,12 +36,8 @@ class DblpAPI
 
     public static function getAuthorId($author)
     {
-        $url = "http://dblp.org/search/author/api?q=";
-        $completeNamePart = explode(" ", $author);
-        foreach ($completeNamePart as $part) {
-            $url = $url . $part . "_";
-        }
-        $url = $url . "&format=json";
+        $author = self::formatData($author);
+        $url = "http://dblp.org/search/author/api?q={$author}&format=json";
         $dblpAuthor = file_get_contents($url);
         $author = json_decode($dblpAuthor, true);
         $dblpId = null;
@@ -109,6 +108,19 @@ class DblpAPI
             }
         }
         return $publication;
+    }
+
+    private static function formatData($string){
+        $data = explode(" " , $string);
+        $arrayKeys = array_keys($data);
+        $lastArrayKey = end($arrayKeys);
+        $formattedData = "";
+        foreach($data as $key => $part){
+            $formattedData = $formattedData . $part;
+            if($key !== $lastArrayKey)
+                $formattedData = $formattedData . "_";
+        }
+        return $formattedData;
     }
 
 }

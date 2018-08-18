@@ -14,7 +14,7 @@ class DblpPublicationTest extends TestCase
      * @test
      */
     public function canStoreAllDblpPublications(){
-        $dblpPublicationList = DblpAPI::getAllPublications("Giuseppe" , "Desolda");
+        $dblpPublicationList = DblpAPI::getAllPublications("Maria Francesca" , "Costabile");
         foreach($dblpPublicationList as $dblpPublication){
             $publication = new Publication();
             $publicationId = $publication->create($dblpPublication->toArray())->id;
@@ -42,7 +42,7 @@ class DblpPublicationTest extends TestCase
      * @test
      */
     public function cantStoreTheSamePublicationTwice(){
-        $dblpPublicationList = DblpAPI::getAllPublications("Giuseppe" , "Desolda");
+        $dblpPublicationList = DblpAPI::getAllPublications("Maria Francesca" , "Costabile");
         $totalPublication = count($dblpPublicationList);
         $notAdded = array();
         foreach($dblpPublicationList as $dblpPublication){
