@@ -14,7 +14,7 @@ class Author extends Model
     }
 
     protected $fillable = [
-        'name'
+        'name' , 'dblp_id'
     ];
 
 }

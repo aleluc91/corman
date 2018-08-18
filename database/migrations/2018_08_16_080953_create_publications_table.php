@@ -16,18 +16,18 @@ class CreatePublicationsTable extends Migration
         Schema::create('publications', function (Blueprint $table) {
             $table->increments('id');
             $table->string('dblp_id')->nullable();
-            $table->string('title');
-            $table->string('venue');
+            $table->text('title')->nullable();
+            $table->string('venue')->nullable();
             $table->string('publisher')->nullable();
             $table->integer('volume')->nullable();
             $table->integer('number')->nullable();
             $table->string('pages')->nullable();
-            $table->year('year');
-            $table->string('type');
-            $table->string('key');
+            $table->year('year')->nullable();
+            $table->string('type')->nullable();
+            $table->string('key')->nullable();
             $table->string('doi')->nullable();
-            $table->string('ee');
-            $table->string('url');
+            $table->string('ee')->nullable();
+            $table->string('url')->nullable();
             $table->timestamps();
         });
     }

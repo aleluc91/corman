@@ -14,34 +14,67 @@ use App\Dblp\DblpPublication;
 class DblpAPI
 {
 
-    public static function getAllPublications(string $authorName , string $authorSurname){
+    public static function getAllPublications(string $authorName, string $authorSurname)
+    {
         $url = "http://dblp.org/search/publ/api?q={$authorName}_{$authorSurname}&format=json&h=100";
         $jsonPublications = file_get_contents($url);
-        $publications = json_decode($jsonPublications , true);
-        //$total = $publications['result']['hits']['@sent'];
+        $publications = json_decode($jsonPublications, true);
         $publicationList = array();
-        foreach($publications['result']['hits']['hit'] as $hit ){
+        foreach ($publications['result']['hits']['hit'] as $hit) {
             $publication = new DblpPublication();
             $id = $hit['@id'];
             $publication->setId($id);
             $info = $hit['info'];
-            array_push($publicationList , self::filterInfo($info , $publication));
+            array_push($publicationList, self::filterInfo($info, $publication));
         }
         return $publicationList;
     }
 
-    private static function filterInfo($info , $publication){
-        foreach($info as $key => $value){
+
+    public static function getAuthorId($author)
+    {
+        $url = "http://dblp.org/search/author/api?q=";
+        $completeNamePart = explode(" ", $author);
+        foreach ($completeNamePart as $part) {
+            $url = $url . $part . "_";
+        }
+        $url = $url . "&format=json";
+        $dblpAuthor = file_get_contents($url);
+        $author = json_decode($dblpAuthor, true);
+        $dblpId = null;
+        foreach ($author['result']['hits']['hit'] as $value) {
+            $dblpId = $value['@id'];
+        }
+        return $dblpId;
+    }
+
+    private static function filterInfo($info, $publication)
+    {
+        foreach ($info as $key => $value) {
             switch ($key) {
                 case 'authors':
-                    $publication->setAuthors($info['authors']['author']);
-                    var_dump($info['authors']['author']);
+                    if(is_array($info[$key]['author']))
+                        $publication->setAuthors($info[$key]['author']);
+                    else
+                        $publication->setAuthors(array($info[$key]['author']));
                     break;
                 case 'title' :
                     $publication->setTitle($value);
                     break;
                 case 'venue' :
-                    $publication->setVenue($value);
+                    if(is_array($value)){
+                        $venues = "";
+                        $arrayKeys = array_keys($value);
+                        $lastArrayKey = end($arrayKeys);
+                        foreach($value as $key => $value) {
+                            $venues = $venues . $value;
+                            if($key !== $lastArrayKey)
+                                $venues = $venues . ",";
+                        }
+                        $publication->setVenue($venues);
+                    }else{
+                        $publication->setVenue($value);
+                    }
                     break;
                 case 'publisher' :
                     $publication->setPublisher($value);
