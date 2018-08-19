@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Dblp\DblpAPI;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -24,8 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        DblpAPI::getAllPublications('Giuseppe' , 'Desolda');
-        DblpAPI::getAuthorId("Maria Francesca Costabile");
-        return view('home');
+        $publications = \App\User::find(Auth::user()->id)->author->publications()->paginate(10);
+        return view('home' , ['publications' => $publications]);
     }
 }

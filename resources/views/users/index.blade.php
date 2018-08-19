@@ -29,17 +29,17 @@
                     <div class="card-body bg-white">
                         <ul>
                             <li><i class="far fa-envelope"></i> <span
-                                        class="text-muted">Email : </span> {{Auth::user()->email}}</li>
+                                        class="text-muted ml-2">Email : </span>{{Auth::user()->email}}</li>
                             <li><i class="fas fa-calendar-alt"></i> <span
-                                        class="text-muted">Date of birth : </span> {{Auth::user()->date_of_birth}}</li>
+                                        class="text-muted ml-2">Date of birth : </span> {{Auth::user()->date_of_birth}}</li>
                             <li><i class="far fas fa-map-marker-alt"></i> <span
-                                        class="text-muted">Country : </span> {{Auth::user()->country}}</li>
+                                        class="text-muted ml-2">Country : </span> {{Auth::user()->country}}</li>
                             <li><i class="far fa-envelope"></i> <span
-                                        class="text-muted">Gender : </span> {{Auth::user()->gender}}</li>
+                                        class="text-muted ml-2">Gender : </span> {{Auth::user()->gender}}</li>
                             <li><i class="far fa-envelope"></i> <span
-                                        class="text-muted">Affiliation : </span> {{Auth::user()->affiliation}}</li>
+                                        class="text-muted ml-2">Affiliation : </span> {{Auth::user()->affiliation}}</li>
                             <li><i class="far fa-envelope"></i> <span
-                                        class="text-muted">Lines of research : </span> {{Auth::user()->lines_of_research}}
+                                        class="text-muted ml-2">Lines of research : </span> {{Auth::user()->lines_of_research}}
                             </li>
                         </ul>
                     </div>
