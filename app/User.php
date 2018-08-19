@@ -27,9 +27,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    /*public function author()
+    public function author()
     {
-        $this->hasOne('App\Author');
-    }*/
+        return $this->hasOne('App\Author' , 'dblp_id' , 'dblp_id');
+    }
 
 }

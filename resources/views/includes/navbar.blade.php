@@ -1,12 +1,12 @@
 
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow h-10">
+    <nav class="navbar navbar-laravel navbar-expand-md navbar-light shadow h-10">
         <div class="container">
             @guest
-            <a class="navbar-brand" style="text-transform: uppercase ; font-weight: 700;" href="{{ url('/') }}">
+            <a class="navbar-brand text-white" style="text-transform: uppercase ; font-weight: 700;" href="{{ url('/home') }}">
                 <h1>{{ config('app.name', 'Laravel') }}</h1>
             </a>
             @else
-                <a class="navbar-brand" style="text-transform: uppercase ; font-weight: 700;" href="{{ url('/') }}">
+                <a class="navbar-brand text-white" style="text-transform: uppercase ; font-weight: 700;" href="{{ url('/home') }}">
                     <h1>{{ config('app.name', 'Laravel') }}</h1>
                 </a>
             @endguest
