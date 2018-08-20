@@ -26,6 +26,14 @@ class HomeController extends Controller
     public function index()
     {
         $publications = \App\User::find(Auth::user()->id)->author->publications()->paginate(10);
-        return view('home' , ['publications' => $publications]);
+        $authorsList = array();
+        foreach($publications as $publication){
+            $authors = $publication->authors;
+            array_push($authorsList , $authors);
+        }
+        return view('home' , [
+            'publications' => $publications,
+            'authors' => $authorsList
+        ]);
     }
 }

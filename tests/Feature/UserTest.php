@@ -22,6 +22,13 @@ class UserTest extends TestCase
     /**
      * @test
      */
+    public function aUserCanFindAllItsPublicationsAndItsAuthors(){
+
+    }
+
+    /**
+     * @test
+     */
     public function aUserCanViewOnePublication(){
         $publication = \App\User::find(1)->author->publications->first();
         $this->assertNotNull($publication);

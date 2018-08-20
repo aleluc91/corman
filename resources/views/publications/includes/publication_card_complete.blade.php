@@ -9,6 +9,12 @@
         </div>
 
         <p class="text-secondary">{{$publication['venue']}}</p>
-        <p class="text-secondary">Descrizione</p>
+        <p class="text-secondary">
+            @if(!empty($publication['description']))
+                {{$publication['description']}}
+            @else
+                No description founded for this publication
+            @endif
+        </p>
     </div>
 </div>

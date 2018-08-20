@@ -4,9 +4,9 @@
 <div class="container mt-3">
     <div class="row">
         <div class="col-md-8">
-            @foreach($publications as $publication)
-                @include('publications.includes.publication_card' , $publication)
-            @endforeach
+            @for($i=0 ; $i <= count($publications) - 1 ; $i++)
+                @include('publications.includes.publication_card' , ['publication' => $publications[$i] , 'authors' => $authors[$i]])
+            @endfor
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     {{$publications->links()}}
