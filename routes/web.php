@@ -19,7 +19,13 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+//Users
 Route::get('/users/index' , 'UsersProfileController@index')->name('users.index');
 Route::patch('/users/{user}' , 'UsersProfileController@update')->name('users.update');
 
+//DblpPublications
 Route::post('/dblp/store' , 'DblpPublicationController')->name("dblp.store");
+
+
+//Publications
+Route::get('/publications/show/{publication}' , 'PublicationController@show')->name('publications.show');

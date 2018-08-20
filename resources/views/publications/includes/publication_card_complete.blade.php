@@ -1,6 +1,6 @@
 
-<div class="card mb-3 shadow">
-    <div class="card-body p-2">
+<div class="card">
+    <div class="card-body">
         <p class="text-primary">{{$publication['type']}}</p>
         <div class="publication-card-link">
             <h4>

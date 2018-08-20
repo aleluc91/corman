@@ -5,10 +5,10 @@
 // Variables
 @import "variables";
 
+@import 'corman/color';
+
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
-
-@import 'variables';
 
 @import 'corman/card';
 
@@ -16,8 +16,12 @@
 
 @import 'corman/layout';
 
+@import 'corman/link';
+
+
+
 .navbar-laravel {
-  background-color: #90323d;
+  background-color: $color1;
 }
 
 .main-text{
@@ -30,6 +34,7 @@
   font-weight: 700;
   border-bottom: 1px solid #00adb5;
 }
+
 
 
 

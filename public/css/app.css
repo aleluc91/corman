@@ -10545,6 +10545,15 @@ a.text-dark:focus {
   margin-bottom: 2px;
 }
 
+.authors-card-image img {
+  display: block;
+  height: 30px;
+  width: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+}
+
 .user-profile .avatar {
   display: block;
   height: 150px;
@@ -10588,6 +10597,15 @@ body {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
+}
+
+.publication-card-link a {
+  color: #000000;
+}
+
+.publication-card-link a:hover {
+  color: #90323d;
+  text-decoration: unset;
 }
 
 .navbar-laravel {
