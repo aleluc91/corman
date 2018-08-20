@@ -13,7 +13,21 @@ class Publication extends Model
     }
 
     protected $fillable = [
-       'dblp_id' , 'title' , 'venue' , 'volume' , 'number' , 'publisher' , 'pages' , 'year' , 'type' , 'key' , 'doi' , 'ee' , 'url'
+       'dblp_id' ,
+        'title' ,
+        'venue' ,
+        'volume' ,
+        'number' ,
+        'publisher' ,
+        'pages' ,
+        'year' ,
+        'type' ,
+        'key' ,
+        'doi' ,
+        'ee' ,
+        'url',
+        'description',
+        'tags'
     ];
 
 }

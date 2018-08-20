@@ -13,7 +13,7 @@ class DblpPublicationTest extends TestCase
     /**
      * @test
      */
-/*    public function canStoreAllDblpPublications(){
+   /*public function canStoreAllDblpPublications(){
         $dblpPublicationList = DblpAPI::getAllPublications("Giuseppe" , "Desolda");
         foreach($dblpPublicationList as $dblpPublication){
             $publicationCount = Publication::where('dblp_id' , $dblpPublication->getId())->count();

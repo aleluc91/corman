@@ -28,6 +28,8 @@ class CreatePublicationsTable extends Migration
             $table->string('doi')->nullable();
             $table->string('ee')->nullable();
             $table->string('url')->nullable();
+            $table->text('description')->nullable();
+            $table->text('tags')->nullable();
             $table->timestamps();
         });
     }
