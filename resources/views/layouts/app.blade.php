@@ -23,15 +23,14 @@
     @stack('styles')
 </head>
 <body>
-    <div class="main-wrapper">
-        @include('includes.navbar')
 
-            <main class="container py-2 h-90" style="min-height: 100%">
+        @include('includes.navbar')
+        <div class="main-body">
+            <main class="main-body-content py-2">
                 @yield('content')
             </main>
+        </div>
+        @include('includes.footer')
 
-
-            @include('includes.footer')
-    </div>
 </body>
 </html>

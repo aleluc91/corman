@@ -1,5 +1,5 @@
 
-    <nav class="navbar navbar-laravel navbar-expand-md navbar-light shadow h-10">
+    <nav class="navbar fixed-top navbar-laravel navbar-expand-md navbar-light shadow">
         <div class="container">
             @guest
             <a class="navbar-brand text-white" style="text-transform: uppercase ; font-weight: 700;" href="{{ url('/home') }}">
