@@ -7,13 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Publication extends Model
 {
     //
-
-    public function authors(){
-        return $this->belongsToMany(Author::class , 'author_publication')->withTimestamps();
-    }
-
     protected $fillable = [
-       'dblp_id' ,
+        'dblp_id' ,
         'title' ,
         'venue' ,
         'volume' ,
@@ -29,5 +24,15 @@ class Publication extends Model
         'description',
         'tags'
     ];
+
+    public function authors(){
+        return $this->belongsToMany(Author::class , 'author_publication')->withTimestamps();
+    }
+
+    public function tags(){
+        return $this->hasMany(Tag::class);
+    }
+
+
 
 }

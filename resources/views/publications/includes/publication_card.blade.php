@@ -45,7 +45,7 @@
             @endif
         </p>
         <p>
-            
+
         </p>
     </div>
     <div class="card-footer bg-white p-2">
