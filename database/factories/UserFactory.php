@@ -15,8 +15,8 @@ use Faker\Generator as Faker;
 
 $factory->define(App\User::class, function (Faker $faker) {
     return [
-        'name' => "Giuseppe",
-        'last_name' => "Desolda",
+        'name' => $faker->firstNameMale,
+        'last_name' => $faker->lastName,
         'email' => $faker->unique()->safeEmail,
         'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
         'date_of_birth' => $faker->date('d-m-Y'),
@@ -24,6 +24,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'gender' => "male",
         'affiliation' => 'Università degli studi di Bari',
         'lines_of_research' => 'ium,test,test',
+        'dblp_id' => $faker->randomNumber(6 , false),
         'remember_token' => str_random(10)
     ];
 

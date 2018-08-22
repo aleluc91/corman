@@ -12,6 +12,6 @@ class Tag extends Model
     ];
 
     public function publications(){
-        return $this->hasMany(Publication::class);
+        return $this->belongsToMany(Publication::class)->withTimestamps();
     }
 }

@@ -2,10 +2,6 @@
  * Selectize bootstrap 4
  */
 
-//Import Boostrap 4 functions and variables
-@import "../bootstrap/functions";
-@import "../bootstrap/variables";
-@import "../bootstrap/mixins";
 
 $selectize-font-family: inherit !default;
 $selectize-font-size: inherit !default;
@@ -58,10 +54,6 @@ $selectize-arrow-offset: calc(#{$selectize-padding-x} + 5px) !default;
 @import "selectize";
 
 //Import Plugins
-@import "plugins/drag_drop";
-@import "plugins/dropdown_header";
-@import "plugins/optgroup_columns";
-@import "plugins/remove_button";
 
 .selectize-dropdown, .selectize-dropdown.form-control {
   height: auto;

@@ -29,10 +29,8 @@ class Publication extends Model
         return $this->belongsToMany(Author::class , 'author_publication')->withTimestamps();
     }
 
-    public function tags(){
-        return $this->hasMany(Tag::class);
+    public function publication_tags(){
+        return $this->belongsToMany(Tag::class , 'publication_tag')->withTimestamps();
     }
-
-
 
 }

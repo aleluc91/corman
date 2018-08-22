@@ -15,7 +15,7 @@ class CreatePublicationTagTable extends Migration
     {
         Schema::create('publication_tag', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('publciation_id');
+            $table->integer('publication_id');
             $table->integer('tag_id');
             $table->timestamps();
         });
