@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8">
             @for($i=0 ; $i <= count($publications) - 1 ; $i++)
-                @include('publications.includes.publication_card' , ['publication' => $publications[$i] , 'authors' => $authors[$i]])
+                @include('publications.includes.publication_card' , ['publication' => $publications[$i] , 'authors' => $authors[$i] , 'tags' => $tags[$i]])
             @endfor
             <div class="row justify-content-center">
                 <div class="col-md-8">

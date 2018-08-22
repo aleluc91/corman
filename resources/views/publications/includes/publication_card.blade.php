@@ -44,9 +44,13 @@
                 No description founded for this publication
             @endif
         </p>
+        @if(!empty($tags))
         <p>
-
+            @foreach($tags as $tag)
+                <span class="badge badge-info">{{$tag->tag}}</span>
+            @endforeach
         </p>
+        @endif
     </div>
     <div class="card-footer bg-white p-2">
         <p><span class="text-primary">Authors:</span><br/>

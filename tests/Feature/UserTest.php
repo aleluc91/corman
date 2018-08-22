@@ -111,4 +111,20 @@ class UserTest extends TestCase
         $this->assertNotNull($publication->publication_tags);
     }
 
+    /**
+     * @test
+     */
+    public function aUserCanViewAllAuthorAndTagsOfSelectedPublication()
+    {
+        $user = \App\User::with('author.publications')->find(1);
+        foreach($user->author->publications as $publication){
+            var_dump("1");
+            foreach($publication->authors as $author)
+                var_dump($author->name);
+            foreach($publication->publication_tags as $tag)
+                var_dump($tag->tag);
+        }
+        $this->assertTrue(true);
+    }
+
 }

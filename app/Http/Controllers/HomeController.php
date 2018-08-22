@@ -25,15 +25,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $publications = \App\User::find(Auth::user()->id)->author->publications()->paginate(10);
-        $authorsList = array();
-        foreach($publications as $publication){
-            $authors = $publication->authors;
-            array_push($authorsList , $authors);
-        }
-        return view('home' , [
-            'publications' => $publications,
-            'authors' => $authorsList
-        ]);
+        $publications = \App\Publication::with(['authors' , 'publication_tags'])->whereHas('authors' , function($query){
+            $query->where('dblp_id' , '=' , Auth::user()->dblp_id);
+        })->paginate(10);
+        //$user = \App\User::with('author.publications')->find(Auth::user()->id);
+        //$publications = $user->author->publications->paginate(10);
+        //$publications = \App\User::find(Auth::user()->id)->author->publications()->paginate(10);
+        $authors = array();
+        $tags = array();
+        foreach($publications as $publication)
+            array_push($authors , $publication->authors);
+        foreach($publications as $publication)
+            array_push($tags , $publication->publication_tags);
+        return view('home' , compact('publications' , 'authors' , 'tags'));
     }
+
 }
