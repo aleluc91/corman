@@ -33,4 +33,8 @@ class Publication extends Model
         return $this->belongsToMany(Tag::class , 'publication_tag')->withTimestamps();
     }
 
+    public function multimedias(){
+        return $this->hasMany(Multimedia::class);
+    }
+
 }
