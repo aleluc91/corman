@@ -29,8 +29,8 @@ class PublicationController extends Controller
         return view('publications.show' , compact('publication' , 'authors' , 'images' , 'tags'));
     }
 
-    public function store(Request $request){
-
+    public function edit(Request $request){
+        return view('publications.edit');
 
     }
 

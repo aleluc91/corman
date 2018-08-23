@@ -7,7 +7,7 @@
     @endpush
 
     <div class="container mt-3">
-        <h4 class="text-primary">{{$publication['type']}}</h4>
+        <h4 class="text-primary">{{$publication['type']}}
         <h3>{{$publication['title']}}</h3>
         <div class="row mt-3">
             <div class="col-md-5">
@@ -92,6 +92,9 @@
                 @include('publications.includes.authors_card' , ['authors' => $authors , 'images' => $images])
             </div>
         </div>--}}
+
+                <a href="{{ route('publications.edit' , ['id' => $publication['id']]) }}" class="btn btn-info float-right"><span class="mr-2"><i class="fa fa-edit"></i></span>Edit publication</a>
+
     </div>
 
     @push('scripts')
@@ -107,7 +110,7 @@
                    speed: 500,
                    fade: true,
                    cssEase: 'linear',
-                   nextArrow: "<button type='button' class='slick-next pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>"
+                   nextArrow: "<button type='button' class='slick-next pull-right'><i class='far fa-angle-right f044' aria-hidden='true'></i></button>"
                });
                $('.slick-next').css('{color: #90323d}');
             });
