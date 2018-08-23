@@ -10,9 +10,7 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    @stack('scripts')
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -31,6 +29,10 @@
             </main>
         </div>
         @include('includes.footer')
+
+        <!-- Scripts -->
+        <script src="{{ asset('js/app.js') }}"></script>
+        @stack('scripts')
 
 </body>
 </html>

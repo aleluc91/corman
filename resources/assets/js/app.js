@@ -7,7 +7,7 @@
 
 require('./bootstrap');
 require('@fortawesome/fontawesome-free/js/all');
-require('selectize.js/dist/js/standalone/selectize.js')
+require('selectize.js/dist/js/standalone/selectize.js');
 
 window.Vue = require('vue');
 

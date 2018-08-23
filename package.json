@@ -22,6 +22,7 @@
     },
     "dependencies": {
         "selectivity": "^3.1.0",
-        "selectize.js": "^0.12.12"
+        "selectize.js": "^0.12.12",
+        "slick-carousel": "^1.8.1"
     }
 }
