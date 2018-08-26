@@ -25,7 +25,10 @@ class MultimediaController extends Controller
             $array = array();
             $publicationId = $request->get('publicationId');
             foreach($request->file('file') as $file){
-                $path = $file->store('images');
+                $filename = uniqid('img_');
+                $path = $file->store(
+                    'publications_image' , 'public'
+                );
                 $type = $file->getClientOriginalExtension();
                 $multimedia = new Multimedia();
                 $multimedia->fill([

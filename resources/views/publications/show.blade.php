@@ -11,37 +11,40 @@
         <h3>{{$publication['title']}}</h3>
         <div class="row mt-3">
             <div class="col-md-5">
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <div id="carouselMultimedia" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        @for($i = 0 ; $i <= count($publicationMultimedias) - 1 ; $i++)
+                        <li data-target="#carouselMultimedia" data-slide-to="{{$i}}" class="active"></li>
+                        @endfor
                     </ol>
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img class="d-block w-100" src="https://picsum.photos/500/500/?random" alt="First slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="https://picsum.photos/400/400/?random" alt="https://picsum.photos/400/400/?random">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="https://picsum.photos/400/400/?random" alt="Third slide">
-                        </div>
+                        @for($i = 0 ; $i <= count($publicationMultimedias) - 1 ; $i++)
+                            @if($i === 0)
+                                <div class="carousel-item active">
+                                    <img class="d-block w-100" src="{{ asset($publicationMultimedias[$i]) }}" alt="Multimedia for current publication">
+                                </div>
+                            @else
+                                <div class="carousel-item">
+                                    <img class="d-block w-100" src="{{ asset($publicationMultimedias[$i]) }}" alt="Multimedia for current publication">
+                                </div>
+                            @endif
+
+                        @endfor
                     </div>
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <a class="carousel-control-prev" href="#carouselMultimedia" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
                     </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <a class="carousel-control-next" href="#carouselMultimedia" role="button" data-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
             </div>
             <div class="col-md-7">
-                <p>Venue : <span class="text-muted">Test venue</span></p>
-                <p>Volume : Test volume</p>
-                <p>Number : Test number</p>
+                <p>Venue : <span class="text-muted">{{ $publication['venue'] }}</span></p>
+                <p>Volume : <span class="text-muted">{{ $publication['volume'] }}</span></p>
+                <p>Number : {{ $publication['number'] }}</p>
                 <p>{{$publication['description']}}</p>
                 @if(!empty($tags))
                     <p>
@@ -53,7 +56,7 @@
                 <div>
                     @for($i = 0 ; $i <= count($authors) - 1 ; $i++)
                     <ul>
-                        <li class="authors-card-image"> <img src="{{ asset('storage/'. $images[$i]) }}"/> {{$authors[$i]->name}}</li>
+                        <li class="authors-card-image"> <img src="{{ asset('storage/'. $authorsImage[$i]) }}"/> {{$authors[$i]->name}}</li>
                     </ul>
                     @endfor
                 </div>

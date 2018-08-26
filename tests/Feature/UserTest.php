@@ -151,4 +151,6 @@ class UserTest extends TestCase
         $this->assertNotEmpty($publication->multimedias);
     }
 
+    
+
 }
