@@ -30,3 +30,6 @@ Route::post('/dblp/store' , 'DblpPublicationController')->name("dblp.store");
 //Publications
 Route::get('/publications/show/{publication}' , 'PublicationController@show')->name('publications.show');
 Route::get('/publications/{publication}/edit' , 'PublicationController@edit')->name('publications.edit');
+
+//Multimedia
+Route::post('/multimedias/store' , 'MultimediaController@store')->name('multimedias.store');

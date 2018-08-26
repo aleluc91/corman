@@ -45,13 +45,16 @@ class UserTest extends TestCase
                     array_push($tagsId, $tag->id);
                 }
                 $p->publication_tags()->sync($tagsId);
+                $multimedias = factory(\App\Multimedia::class , 2)->create([
+                   'publication_id' => $p->id
+                ]);
             });
     }
 
     /**
      * @test
      */
-    public function aUserCanFindAllItsPublications()
+    public function a_user_can_find_all_its_pubications()
     {
         $publications = \App\User::find(1)->author->publications;
         $publicationsCount = \App\Publication::all()->count();
@@ -69,7 +72,7 @@ class UserTest extends TestCase
     /**
      * @test
      */
-    public function aUserCanViewOnePublication()
+    public function a_user_can_view_one_publication()
     {
         $publication = \App\User::find(1)->author->publications->first();
         $this->assertNotNull($publication);
@@ -78,7 +81,7 @@ class UserTest extends TestCase
     /**
      * @test
      */
-    public function aUserCanViewAllAuthorsOfSelectedPublication()
+    public function a_user_can_view_all_authors_of_selected_publication()
     {
         //$authors = \App\User::find(1)->author->publications->first()->authors;
         $user = \App\User::with('author.publications.authors')->find(1);
@@ -88,7 +91,7 @@ class UserTest extends TestCase
     /**
      * @test
      */
-    public function aUserCanViewAllAuthorsImageOfSelectedPublication()
+    public function a_user_can_view_all_authors_image_of_selected_publication()
     {
         $authors = \App\User::find(1)->author->publications->first()->authors;
         $images = array();
@@ -105,7 +108,7 @@ class UserTest extends TestCase
     /**
      * @test
      */
-    public function aUserCanViewAllTagsOfSelectedPublication()
+    public function a_user_can_view_all_tags_of_selected_publication()
     {
         $publication = \App\Publication::with('publication_tags')->find(2);
         $this->assertNotNull($publication->publication_tags);
@@ -114,7 +117,7 @@ class UserTest extends TestCase
     /**
      * @test
      */
-    public function aUserCanViewAllAuthorAndTagsOfSelectedPublication()
+    public function a_user_can_view_all_author_and_tags_of_selected_publication()
     {
         $user = \App\User::with('author.publications')->find(1);
         foreach($user->author->publications as $publication){
@@ -125,6 +128,27 @@ class UserTest extends TestCase
                 var_dump($tag->tag);
         }
         $this->assertTrue(true);
+    }
+
+    /**
+     * @test
+     */
+    public function a_user_can_store_a_multimedia_for_selected_publication(){
+        $user = \App\User::with('author.publications')->find(1);
+        $publicationId = $user->author->publications[0]->id;
+        $multimedia = factory(\App\Multimedia::class)->create([
+            'publication_id' => $publicationId
+        ]);
+        $this->assertNotEmpty($multimedia);
+    }
+
+    /**
+     * @test
+     */
+    public function a_user_can_view_all_multimedias_of_selected_publication(){
+        $user = \App\User::with('author.publications')->find(1);
+        $publication = $user->author->publications[0];
+        $this->assertNotEmpty($publication->multimedias);
     }
 
 }

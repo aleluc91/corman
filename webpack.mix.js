@@ -12,6 +12,6 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
-    .js('resources/assets/js/tagInput.js' , 'public/js')
-    .copy('node_modules/slick-carousel/slick' , 'public/vendor/slick')
-   .sass('resources/assets/sass/app.scss', 'public/css')
+    .js('resources/assets/js/tagInput.js', 'public/js')
+    .copy('node_modules/selectize.js/dist', 'public/vendor/selectize.js')
+    .sass('resources/assets/sass/app.scss', 'public/css')

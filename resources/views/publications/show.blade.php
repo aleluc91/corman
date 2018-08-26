@@ -97,23 +97,4 @@
 
     </div>
 
-    @push('scripts')
-        <script type="text/javascript" src="{{asset('vendor/slick/slick.min.js')}}"></script>
-        <script type="text/javascript">
-            $(document).ready(function(){
-               $('.publicationSlider').slick({
-                   centerMode: true,
-                   slidesToShow: 1,
-                   slidesToScroll: 1,
-                   dots: true,
-                   infinite: true,
-                   speed: 500,
-                   fade: true,
-                   cssEase: 'linear',
-                   nextArrow: "<button type='button' class='slick-next pull-right'><i class='far fa-angle-right f044' aria-hidden='true'></i></button>"
-               });
-               $('.slick-next').css('{color: #90323d}');
-            });
-        </script>
-    @endpush
 @endsection

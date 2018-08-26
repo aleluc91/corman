@@ -19,6 +19,10 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @stack('styles')
+
+<!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    @stack('scripts')
 </head>
 <body>
 
@@ -30,9 +34,7 @@
         </div>
         @include('includes.footer')
 
-        <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}"></script>
-        @stack('scripts')
+
 
 </body>
 </html>

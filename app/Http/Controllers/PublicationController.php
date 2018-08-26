@@ -15,22 +15,34 @@ class PublicationController extends Controller
         $publication = Publication::with(array('authors' , 'publication_tags'))->find($id);
         //$publication = User::find(Auth::user()->id)->author->publications->find($id);
 
-        $images = array();
+        $authorsImage = array();
         $authors = $publication->authors;
         $tags = $publication->publication_tags;
         foreach($publication->authors as $author){
             $user = $author->user;
             if(!empty($user))
-                array_push($images , $user->avatar);
+                array_push($authorsImage , $user->avatar);
             else
-                array_push($images , "avatar.jpg");
+                array_push($authorsImage , "avatar.jpg");
         }
 
-        return view('publications.show' , compact('publication' , 'authors' , 'images' , 'tags'));
+        return view('publications.show' , compact('publication' , 'authors' , 'authorsImage' , 'tags'));
     }
 
-    public function edit(Request $request){
-        return view('publications.edit');
+    public function edit($id){
+        $publication = Publication::with(array('authors' , 'publication_tags' , 'multimedias'))->find($id);
+        $authorsImage = array();
+        $authors = $publication->authors;
+        $tags = $publication->publication_tags;
+        $multimedias = $publication->multimedias;
+        foreach($publication->authors as $author){
+            $user = $author->user;
+            if(!empty($user))
+                array_push($authorsImage , $user->avatar);
+            else
+                array_push($authorsImage , "avatar.jpg");
+        }
+        return view('publications.edit', compact('publication' , 'authors' , 'authorsImage' , 'tags' , 'multimedias'));
 
     }
 
