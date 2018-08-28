@@ -45,11 +45,11 @@
             @endif
         </p>
         @if(!empty($topics))
-        <p>
+        <div>
             @foreach($topics as $topic)
-                <span class="badge badge-info">{{$topic->name}}</span>
+                <h4 class="d-inline"><span class="badge badge-info">{{$topic->name}}</span></h4>
             @endforeach
-        </p>
+        </div>
         @endif
     </div>
     <div class="card-footer bg-white p-2">

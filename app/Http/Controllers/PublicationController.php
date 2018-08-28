@@ -23,74 +23,81 @@ class PublicationController extends Controller
     }
 
 
-    public function show($id){
-        $publication = Publication::with(array('authors' , 'topics' , 'multimedias'))->find($id);
+    public function show($id)
+    {
+        $publication = Publication::with(array('authors', 'topics', 'multimedias'))->find($id);
         $authors = $publication->authors;
         $topics = $publication->topics;
         $multimedias = $publication->multimedias;
 
         $authorsImage = array();
-        foreach($publication->authors as $author){
+        foreach ($publication->authors as $author) {
             $user = $author->user;
-            if(!empty($user))
-                array_push($authorsImage , $user->avatar);
+            if (!empty($user))
+                array_push($authorsImage, $user->avatar);
             else
-                array_push($authorsImage , "avatar.jpg");
+                array_push($authorsImage, "avatar.jpg");
         }
 
         $publicationMultimedias = array();
-        foreach($publication->multimedias as $multimedia){
-            array_push($publicationMultimedias , Storage::url($multimedia->url));
+        foreach ($publication->multimedias as $multimedia) {
+            array_push($publicationMultimedias, Storage::url($multimedia->url));
         }
 
-        return view('publications.show' , compact('publication' , 'authors' , 'authorsImage' , 'topics' , 'publicationMultimedias'));
+        return view('publications.show', compact('publication', 'authors', 'authorsImage', 'topics', 'publicationMultimedias'));
     }
 
-    public function edit($id){
-        $publication = Publication::with(array('authors' , 'topics' , 'multimedias'))->find($id);
+    public function edit($id)
+    {
+        $publication = Publication::with(array('authors', 'topics', 'multimedias'))->find($id);
         $authors = $publication->authors;
         $topics = $publication->topics;
         $multimedias = $publication->multimedias;
-
         $authorsImage = array();
-        foreach($publication->authors as $author){
+        foreach ($publication->authors as $author) {
             $user = $author->user;
-            if(!empty($user))
-                array_push($authorsImage , $user->avatar);
+            if (!empty($user))
+                array_push($authorsImage, $user->avatar);
             else
-                array_push($authorsImage , "avatar.jpg");
+                array_push($authorsImage, "avatar.jpg");
         }
 
-
-
-        return view('publications.edit', compact('publication' , 'authors' , 'authorsImage' , 'topics' , 'multimedias'));
+        return view('publications.edit', compact('publication', 'authors', 'authorsImage', 'topics', 'multimedias'));
 
     }
 
-    public function filter($type , $value){
+    public function filter($type, $value)
+    {
         $publications = null;
-        switch ($type){
+        switch ($type) {
             case "type":
-                $publications = \App\Publication::with(['authors' , 'topics'])->whereHas('authors' , function($query){
-                    $query->where('dblp_url' , '=' , Auth::user()->dblp_url);
-                })->where($type , $value);
+                $publications = \App\Publication::with(['authors', 'topics'])->whereHas('authors', function ($query) {
+                    $query->where('dblp_url', '=', Auth::user()->dblp_url);
+                })->where($type, $value);
                 break;
             case "topic":
+                $publications = \App\Publication::with(['authors', 'topics'])
+                    ->whereHas('authors', function ($query) {
+                        $query->where('dblp_url', '=', Auth::user()->dblp_url);
+                    })
+                    ->whereHas('topics', function ($query) use ($value) {
+                        $query->where('name', $value);
+                    });
                 break;
             case "year":
-                $publications = \App\Publication::with(['authors' , 'topics'])->whereHas('authors' , function($query){
-                    $query->where('dblp_url' , '=' , Auth::user()->dblp_url);
-                })->where($type , $value);
+                $publications = \App\Publication::with(['authors', 'topics'])->whereHas('authors', function ($query) {
+                    $query->where('dblp_url', '=', Auth::user()->dblp_url);
+                })->where($type, $value);
                 break;
         }
         $authors = collect([]);
         $topics = collect([]);
-        $publications->each(function($item , $key) use($authors , $topics){
+        $publications->each(function ($item, $key) use ($authors, $topics) {
             $authors->push($item->authors);
             $topics->push($item->topics);
         });
         $publications = $publications->paginate(10);
-        return view('publications.filter' , compact('publications' , 'authors' , 'topics'));
+        return view('publications.filter', compact('publications', 'authors', 'topics'));
     }
 
 }

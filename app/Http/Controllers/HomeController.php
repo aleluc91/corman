@@ -34,20 +34,24 @@ class HomeController extends Controller
         $singleType = collect([]);
         $singleTopic = collect([]);
         $singleYear = collect([]);
-        $publications->each(function($item , $key) use($authors , $topics , $singleTopic , $singleType , $singleYear){
-           $authors->push($item->authors);
-           $topics->push($item->topics);
-            if(!$singleType->contains($item->type))
-                $singleType->push($item->type);
-           $item->topics->map(function($item , $key) use($singleTopic){
-               if(!$singleTopic->contains($item))
-                   $singleTopic->push($item);
-           });
-           if(!$singleYear->contains($item->year))
-               $singleYear->push($item->year);
-        });
 
-        $publications = $publications->paginate(10);
+        if(!empty($publications)){
+            $publications->each(function($item , $key) use($authors , $topics , $singleTopic , $singleType , $singleYear){
+                $authors->push($item->authors);
+                $topics->push($item->topics);
+                if(!$singleType->contains($item->type))
+                    $singleType->push($item->type);
+                $item->topics->map(function($item , $key) use($singleTopic){
+                    if(!$singleTopic->contains($item))
+                        $singleTopic->push($item);
+                });
+                if(!$singleYear->contains($item->year))
+                    $singleYear->push($item->year);
+            });
+
+            $publications = $publications->paginate(10);
+        }
+
 
         return view('home' , compact(
             'publications' ,

@@ -12,32 +12,32 @@
                 </select>
                 <select class="custom-select" id="typeSelect" hidden>
                     <option value="none">Select a value...</option>
-                    @if(!empty($singleType))
+                    @if($singleType->isNotEmpty())
                     @foreach($singleType as $type)
                     <option value="{{$type}}">{{$type}}</option>
                     @endforeach
                     @else
-                    <option>No values...</option>
+                    <option value="noValues">No values...</option>
                     @endif
                 </select>
                 <select class="custom-select" id="topicSelect" hidden>
                     <option value="none">Select a value...</option>
-                    @if(!empty($singleTopic))
+                    @if($singleTopic->isNotEmpty())
                     @foreach($singleTopic as $topic)
-                    <option value="{{$topic}}">{{$topic}}</option>
+                    <option value="{{$topic->name}}">{{$topic->name}}</option>
                     @endforeach
                     @else
-                    <option>No values...</option>
+                    <option value="noValues">No values...</option>
                     @endif
                 </select>
                 <select class="custom-select" id="yearSelect" hidden>
                     <option value="none">Select a value...</option>
-                    @if(!empty($singleYear))
+                    @if($singleYear->isNotEmpty())
                     @foreach($singleYear as $year)
                     <option value="{{$year}}">{{$year}}</option>
                     @endforeach
                     @else
-                    <option>No values...</option>
+                    <option value="noValues">No values...</option>
                     @endif
                 </select>
                 <div class="input-group-append">
@@ -65,19 +65,37 @@
             topicSelect = $('#topicSelect');
             yearSelect = $('#yearSelect');
             switch($(this).val()){
+                case "none" :
+                    noneSelect.attr('hidden' , false);
+                    typeSelect.attr('hidden' , true);
+                    topicSelect.attr('hidden' , true);
+                    yearSelect.attr('hidden' , true);
+                    break;
                 case "type" :
+                    if(typeSelect.val() === 'noValues')
+                        typeSelect.attr('disabled' , true);
+                    else
+                        typeSelect.attr('disabled' , false);
                     noneSelect.attr('hidden' , true);
                     typeSelect.attr('hidden' , false);
                     topicSelect.attr('hidden' , true);
-                    yearSelect.attr('hidden' , true);;
+                    yearSelect.attr('hidden' , true);
                     break;
                 case "topic" :
+                    if(topicSelect.val() === 'noValues')
+                        topicSelect.attr('disabled' , true);
+                    else
+                        topicSelect.attr('disabled' , false);
                     noneSelect.attr('hidden' , true);
                     typeSelect.attr('hidden' , true);
                     topicSelect.attr('hidden' , false);
                     yearSelect.attr('hidden' , true);
                     break;
                 case "year" :
+                    if(yearSelect.val() === 'noValues')
+                        yearSelect.attr('disabled' , true);
+                    else
+                        yearSelect.attr('disabled' , false);
                     noneSelect.attr('hidden' , true);
                     typeSelect.attr('hidden' , true);
                     topicSelect.attr('hidden' , true);
@@ -94,10 +112,8 @@
                         window.location.href = 'publications/index/type/' + $('#typeSelect').val();
                     break;
                 case "topic" :
-                    noneSelect.attr('hidden' , true);
-                    typeSelect.attr('hidden' , true);
-                    topicSelect.attr('hidden' , false);
-                    yearSelect.attr('hidden' , true);
+                    if(!$('#topicSelect').val() !== "none")
+                        window.location.href = 'publications/index/topic/' + $('#topicSelect').val();
                     break;
                 case "year" :
                     if(!$('#yearSelect').val() !== "none")
