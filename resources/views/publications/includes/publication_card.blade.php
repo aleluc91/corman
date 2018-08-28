@@ -54,10 +54,11 @@
     </div>
     <div class="card-footer bg-white p-2">
         <p><span class="text-primary">Authors:</span><br/>
-            @for($i = 0 ; $i <= count($authors) - 1 ; $i++)
-                <span class="">{{$authors[$i]->name}}</span>
-                @if($i <= count($authors) - 2)
-                    <span class="mr-1">,</span>
+            @for($i = 0 ; $i <= count($authors['authors']) - 1 ; $i++)
+                @if($authors['active'][$i] === true)
+                    <a href="#">{{$authors['authors'][$i]->name}}</a>
+                @else
+                    <span class="">{{$authors['authors'][$i]->name}}</span>
                 @endif
             @endfor
         </p>
