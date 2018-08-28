@@ -34,17 +34,17 @@ class DblpAPI
     }
 
 
-    public static function getAuthorId($author)
+    public static function getAuthorUrl($author)
     {
         $author = self::formatData($author);
         $url = "http://dblp.org/search/author/api?q={$author}&format=json";
         $dblpAuthor = file_get_contents($url);
         $author = json_decode($dblpAuthor, true);
-        $dblpId = null;
+        $dblpUrl = null;
         foreach ($author['result']['hits']['hit'] as $value) {
-            $dblpId = $value['@id'];
+            $dblpUrl = $value['info']['url'];
         }
-        return $dblpId;
+        return $dblpUrl;
     }
 
     private static function filterInfo($info, $publication)

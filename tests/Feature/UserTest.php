@@ -37,14 +37,14 @@ class UserTest extends TestCase
                 if ($value === 1) {
                     $p->authors()->save($author);
                 }
-                $p->authors()->sync($authorsList);
+                $p->authors()->attach($authorsList);
                 $topics = factory(\App\Topic::class , 3)->make();
                 $topicsId = array();
                 foreach($topics as $topic) {
                     $topic->save();
                     array_push($topicsId, $topic->id);
                 }
-                $p->topics()->sync($topicsId);
+                $p->topics()->attach($topicsId);
                 $multimedias = factory(\App\Multimedia::class , 2)->create([
                    'publication_id' => $p->id
                 ]);

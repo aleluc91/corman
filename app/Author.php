@@ -13,7 +13,7 @@ class Author extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\User' , 'dblp_id' , 'dblp_id');
+        return $this->belongsTo('App\User' , 'dblp_url' , 'dblp_url');
     }
 
     public function publications()

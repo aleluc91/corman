@@ -72,14 +72,14 @@ class PublicationController extends Controller
         switch ($type){
             case "type":
                 $publications = \App\Publication::with(['authors' , 'topics'])->whereHas('authors' , function($query){
-                    $query->where('dblp_id' , '=' , Auth::user()->dblp_id);
+                    $query->where('dblp_url' , '=' , Auth::user()->dblp_url);
                 })->where($type , $value);
                 break;
             case "topic":
                 break;
             case "year":
                 $publications = \App\Publication::with(['authors' , 'topics'])->whereHas('authors' , function($query){
-                    $query->where('dblp_id' , '=' , Auth::user()->dblp_id);
+                    $query->where('dblp_url' , '=' , Auth::user()->dblp_url);
                 })->where($type , $value);
                 break;
         }

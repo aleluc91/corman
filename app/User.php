@@ -41,7 +41,7 @@ class User extends Authenticatable
 
     public function author()
     {
-        return $this->hasOne('App\Author' , 'dblp_id' , 'dblp_id');
+        return $this->hasOne('App\Author' , 'dblp_url' , 'dblp_url');
     }
 
 }

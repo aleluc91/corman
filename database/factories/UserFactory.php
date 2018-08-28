@@ -24,7 +24,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'gender' => "male",
         'affiliation' => 'Università degli studi di Bari',
         'lines_of_research' => 'ium,test,test',
-        'dblp_id' => $faker->randomNumber(6 , false),
+        'dblp_url' => $faker->randomNumber(6 , false),
         'remember_token' => str_random(10)
     ];
 

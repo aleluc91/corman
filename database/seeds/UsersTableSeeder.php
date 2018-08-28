@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
             'gender' => 'male',
             'affiliation' => 'Università degli studi di Bari',
             'lines_of_research' => 'ium,test,test',
-            'dblp_id' => '412740'
+            'dblp_url' => 'https://dblp.org/pid/36/11499'
         ]);
 
         DB::table('users')->insert([
@@ -34,7 +34,7 @@ class UsersTableSeeder extends Seeder
             'gender' => 'female',
             'affiliation' => 'Università degli studi di Bari',
             'lines_of_research' => 'ium,test,test',
-            'dblp_id' => '364028'
+            'dblp_url' => 'https://dblp.org/pid/c/MariaFrancescaCostabile'
         ]);
 
     }

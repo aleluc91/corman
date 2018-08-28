@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $publications = \App\Publication::with(['authors' , 'topics'])->whereHas('authors' , function($query){
-            $query->where('dblp_id' , '=' , Auth::user()->dblp_id);
+            $query->where('dblp_url' , '=' , Auth::user()->dblp_url);
         });
 
         $authors = collect([]);

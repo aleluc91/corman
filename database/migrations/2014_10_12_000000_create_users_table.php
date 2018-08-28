@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('lines_of_research');
             $table->string('avatar')->default('avatar.jpg');
             $table->string('privacy')->default('public');
-            $table->string('dblp_id')->nullable();
+            $table->string('dblp_url')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
