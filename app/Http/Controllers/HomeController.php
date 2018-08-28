@@ -23,21 +23,40 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $publications = \App\Publication::with(['authors' , 'publication_tags'])->whereHas('authors' , function($query){
+        $publications = \App\Publication::with(['authors' , 'topics'])->whereHas('authors' , function($query){
             $query->where('dblp_id' , '=' , Auth::user()->dblp_id);
-        })->paginate(10);
-        //$user = \App\User::with('author.publications')->find(Auth::user()->id);
-        //$publications = $user->author->publications->paginate(10);
-        //$publications = \App\User::find(Auth::user()->id)->author->publications()->paginate(10);
-        $authors = array();
-        $tags = array();
-        foreach($publications as $publication)
-            array_push($authors , $publication->authors);
-        foreach($publications as $publication)
-            array_push($tags , $publication->publication_tags);
-        return view('home' , compact('publications' , 'authors' , 'tags'));
+        });
+
+        $authors = collect([]);
+        $topics = collect([]);
+        $singleType = collect([]);
+        $singleTopic = collect([]);
+        $singleYear = collect([]);
+        $publications->each(function($item , $key) use($authors , $topics , $singleTopic , $singleType , $singleYear){
+           $authors->push($item->authors);
+           $topics->push($item->topics);
+            if(!$singleType->contains($item->type))
+                $singleType->push($item->type);
+           $item->topics->map(function($item , $key) use($singleTopic){
+               if(!$singleTopic->contains($item))
+                   $singleTopic->push($item);
+           });
+           if(!$singleYear->contains($item->year))
+               $singleYear->push($item->year);
+        });
+
+        $publications = $publications->paginate(10);
+
+        return view('home' , compact(
+            'publications' ,
+            'authors' ,
+            'topics',
+            'singleType',
+            'singleTopic',
+            'singleYear'
+        ));
     }
 
 }

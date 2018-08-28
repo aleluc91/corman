@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tag extends Model
+class Topic extends Model
 {
     //
     protected $fillable = [
-        'tag'
+        'name'
     ];
 
     public function publications(){

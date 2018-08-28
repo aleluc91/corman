@@ -59,8 +59,8 @@
                                 </textarea>
                             </div>
                             <div id="form-group">
-                                <label for="tag">Publication tag</label>
-                                <select name="tag" id="tag">
+                                <label for="topic">Topic</label>
+                                <select name="topic" id="topic">
                                     <option value="1">Test 1</option>
                                     <option value="2">Test 2</option>
                                     <option value="3">Test 3</option>
@@ -188,7 +188,7 @@
                     }
                 });
 
-                $('#tag').selectize({
+                $('#topic').selectize({
                     plugins: ['remove_button'],
                     maxItems: 3,
                     delimiter: ',',

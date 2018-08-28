@@ -3,6 +3,8 @@
 use Faker\Generator as Faker;
 
 $factory->define(\App\Publication::class, function (Faker $faker) {
+    $type = ['Journal Articles' , 'Conference and Workshop Papers'];
+    $randKeys = array_rand($type , 1);
     return [
         'title' => $faker->sentence(),
         'venue' => $faker->sentence(2 , true),
@@ -11,7 +13,7 @@ $factory->define(\App\Publication::class, function (Faker $faker) {
         'number' => $faker->randomDigitNotNull,
         'pages' => $faker->randomNumber(2) . ":" . $faker->randomNumber(2),
         'year' => $faker->year(),
-        'type' => $faker->sentence(3),
+        'type' => $type[$randKeys],
         'description' => $faker->text
     ];
 });

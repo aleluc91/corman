@@ -38,13 +38,13 @@ class UserTest extends TestCase
                     $p->authors()->save($author);
                 }
                 $p->authors()->sync($authorsList);
-                $tags = factory(\App\Tag::class , 3)->make();
-                $tagsId = array();
-                foreach($tags as $tag) {
-                    $tag->save();
-                    array_push($tagsId, $tag->id);
+                $topics = factory(\App\Topic::class , 3)->make();
+                $topicsId = array();
+                foreach($topics as $topic) {
+                    $topic->save();
+                    array_push($topicsId, $topic->id);
                 }
-                $p->publication_tags()->sync($tagsId);
+                $p->topics()->sync($topicsId);
                 $multimedias = factory(\App\Multimedia::class , 2)->create([
                    'publication_id' => $p->id
                 ]);
@@ -108,24 +108,24 @@ class UserTest extends TestCase
     /**
      * @test
      */
-    public function a_user_can_view_all_tags_of_selected_publication()
+    public function a_user_can_view_all_topics_of_selected_publication()
     {
-        $publication = \App\Publication::with('publication_tags')->find(2);
-        $this->assertNotNull($publication->publication_tags);
+        $publication = \App\Publication::with('topics')->find(2);
+        $this->assertNotNull($publication->topics);
     }
 
     /**
      * @test
      */
-    public function a_user_can_view_all_author_and_tags_of_selected_publication()
+    public function a_user_can_view_all_author_and_topics_of_selected_publication()
     {
         $user = \App\User::with('author.publications')->find(1);
         foreach($user->author->publications as $publication){
             var_dump("1");
             foreach($publication->authors as $author)
                 var_dump($author->name);
-            foreach($publication->publication_tags as $tag)
-                var_dump($tag->tag);
+            foreach($publication->topics as $topic)
+                var_dump($topic->name);
         }
         $this->assertTrue(true);
     }
@@ -151,6 +151,35 @@ class UserTest extends TestCase
         $this->assertNotEmpty($publication->multimedias);
     }
 
-    
+    /**
+     * @test
+     */
+    public function a_user_can_filter_his_publication_by_type(){
+        $user = \App\User::with('author.publications')->find(1);
+        $filteredPublication = $user->author->publications->where('type' , 'Journal Articles');
+        $notFilteredPublication = $user->author->publications->where('type' , '!=' , 'Journal Articles');
+        $filterePublicationCount = count($filteredPublication);
+        $notFilterePublicationCount = count($notFilteredPublication);
+        $totalPublication = count($user->author->publications);
+        $this->assertCount($totalPublication - $notFilterePublicationCount , $filteredPublication);
+    }
+
+    /**
+     * @test
+     */
+    public function a_user_can_find_all_publications_topics_without_duplicate(){
+        $userTopic = \App\User::with('author.publications.topics')->find(1);
+        $topicsCollection = collect([]);
+        $userTopic->author->publications->each(function($item , $key) use($topicsCollection){
+            $item->topics->map(function($item , $key) use($topicsCollection){
+                if(!$topicsCollection->contains($item))
+                    $topicsCollection->push($item);
+            });
+        });
+        $topicsCollection->map(function($item , $key){
+            var_dump($item->name);
+        });
+        $this->assertNotEmpty($topicsCollection);
+    }
 
 }

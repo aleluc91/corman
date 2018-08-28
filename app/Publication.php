@@ -29,8 +29,8 @@ class Publication extends Model
         return $this->belongsToMany(Author::class , 'author_publication')->withTimestamps();
     }
 
-    public function publication_tags(){
-        return $this->belongsToMany(Tag::class , 'publication_tag')->withTimestamps();
+    public function topics(){
+        return $this->belongsToMany(Topic::class , 'publication_topic')->withTimestamps();
     }
 
     public function multimedias(){

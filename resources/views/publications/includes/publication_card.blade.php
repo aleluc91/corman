@@ -44,10 +44,10 @@
                 No description founded for this publication
             @endif
         </p>
-        @if(!empty($tags))
+        @if(!empty($topics))
         <p>
-            @foreach($tags as $tag)
-                <span class="badge badge-info">{{$tag->tag}}</span>
+            @foreach($topics as $topic)
+                <span class="badge badge-info">{{$topic->name}}</span>
             @endforeach
         </p>
         @endif

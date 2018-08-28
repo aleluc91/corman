@@ -45,13 +45,21 @@
                 <p>Venue : <span class="text-muted">{{ $publication['venue'] }}</span></p>
                 <p>Volume : <span class="text-muted">{{ $publication['volume'] }}</span></p>
                 <p>Number : {{ $publication['number'] }}</p>
-                <p>{{$publication['description']}}</p>
-                @if(!empty($tags))
+                <p>Description :</p>
+                @if(!empty($publication['description']))
+                    <p>{{$publication['description']}}</p>
+                @else
+                    <p class="text-muted">This publication has no description.</p>
+                @endif
+                <p>Topics : </p>
+                @if($topics->isNotEmpty())
                     <p>
-                        @foreach($tags as $tag)
-                            <span class="badge badge-info">{{$tag->tag}}</span>
+                        @foreach($topics as $topic)
+                            <span class="badge badge-info">{{$topic->name}}</span>
                         @endforeach
                     </p>
+                @else
+                    <p class="text-muted">This publication has no topic.</p>
                 @endif
                 <div>
                     @for($i = 0 ; $i <= count($authors) - 1 ; $i++)
