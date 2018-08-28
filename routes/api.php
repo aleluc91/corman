@@ -17,7 +17,6 @@ Route::middleware('auth:api')->group(function(){
 
 });
 
-Route::get('topics' , 'API\TopicsController@index');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
