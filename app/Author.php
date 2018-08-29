@@ -8,7 +8,7 @@ class Author extends Model
 {
     //
     protected $fillable = [
-        'name' , 'dblp_id'
+        'name' , 'dblp_url'
     ];
 
     public function user()

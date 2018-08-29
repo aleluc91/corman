@@ -35,5 +35,8 @@ Route::get('/publications/index/{type}/{value}' , 'PublicationController@filter'
 //Multimedia
 Route::post('/multimedias/store' , 'MultimediaController@store')->name('multimedias.store');
 
+//Authors
+Route::get('/author/show/{author}' , 'AuthorController@show')->name('authors.show');
+
 
 

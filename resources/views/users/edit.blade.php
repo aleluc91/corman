@@ -5,7 +5,7 @@
     <div class="container my-2">
         <div class="row">
             <div class="col-md-4">
-                @include('users.includes.user_info')
+                @include('users.includes.user_card' , ['user' , Auth::user()])
 
             </div>
             <div class="col-md-8">
