@@ -31,12 +31,16 @@ Route::post('/dblp/store' , 'DblpPublicationController')->name("dblp.store");
 Route::get('/publications/show/{publication}' , 'PublicationController@show')->name('publications.show');
 Route::get('/publications/{publication}/edit' , 'PublicationController@edit')->name('publications.edit');
 Route::get('/publications/index/{type}/{value}' , 'PublicationController@filter')->name('publications.filter');
+Route::patch('/publications/{publications}' , 'PublicationController@update')->name('publications.update');
 
 //Multimedia
 Route::post('/multimedias/store' , 'MultimediaController@store')->name('multimedias.store');
+Route::delete('/multimedias/{multimedia}' , 'MultimediaController@destroy')->name('multimedias.destroy');
 
 //Authors
 Route::get('/author/show/{author}' , 'AuthorController@show')->name('authors.show');
 
-
+//Topics
+Route::get('/topics/{publication}/get' , 'TopicController@get')->name('topics.get');
+Route::get('/topics/index' , 'TopicController@index')->name('topics.index');
 
