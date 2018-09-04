@@ -21,13 +21,13 @@
 
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link h5" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link h5" href="{{ route('home') }}">Home <span class="sr-only">(current)</span></a>
                     </li>
                 </ul>
 
                 <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search">
-                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                    <input class="form-control mr-sm-2" id="search" type="text" placeholder="Search" autocomplete="off">
+                    <button id="btnSearch" class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
                 </form>
 
 
@@ -73,3 +73,47 @@
             </div>
         </div>
     </nav>
+
+
+
+    @push('body.scripts')
+        <script src="{{ asset('vendor/typeahead/js/typeahead.bundle.min.js') }}"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                var topicsEngine = new Bloodhound({
+                    queryTokenizer: Bloodhound.tokenizers.whitespace,
+                    datumTokenizer: Bloodhound.tokenizers.whitespace,
+                    remote: {
+                        url: 'http://localhost/corman/public/search/autocomplete/topics/%QUERY%',
+                        wildcard: '%QUERY%'
+                    }
+                });
+
+                $('#search').typeahead(
+                    {
+                        minLength: 2,
+                        highlight: true
+                    },
+                    {
+                        name: 'topics',
+                        source: topicsEngine,
+                        displayKey: 'name'
+                    }
+                );
+
+                $('#btnSearch').on('click', function(e){
+                    e.preventDefault();
+                    if($('#search').val())
+                        window.location.href = "http://localhost/corman/public/search/" + $('#search').val() + '/index' ;
+                })
+
+            });
+        </script>
+    @endpush

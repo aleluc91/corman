@@ -44,3 +44,13 @@ Route::get('/author/show/{author}' , 'AuthorController@show')->name('authors.sho
 Route::get('/topics/{publication}/get' , 'TopicController@get')->name('topics.get');
 Route::get('/topics/index' , 'TopicController@index')->name('topics.index');
 
+//Search
+Route::get('/search/autocomplete/users/{query}' , 'SearchController@autoCompleteUsers');
+Route::get('/search/autocomplete/topics/{query}' , 'SearchController@autoCompleteTopics');
+Route::get('/search/autocomplete/publications/{query}' , 'SearchController@autoCompletePublications');
+Route::get('/search/{value}/index' , 'SearchController@index')->name('search.index');
+Route::get('/search/{value}/index/users' , 'SearchController@indexUsers')->name('search.index.users');
+Route::get('/search/{value}/index/publications' , 'SearchController@indexPublications')->name('search.index.publications');
+
+
+

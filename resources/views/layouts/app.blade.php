@@ -18,6 +18,18 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/typeahead/css/typeahead.css') }}" rel="stylesheet">
+    <style>
+        .twitter-typeahead,
+        .tt-hint,
+        .tt-input,
+        .tt-menu{
+            width: auto ! important;
+            font-weight: normal;
+
+        }
+    </style>
+
     @stack('styles')
 
 <!-- Scripts -->

@@ -116,24 +116,24 @@
                                     @endfor
                                     @for($i = 4 ; $i <= count($publicationPresentation) - 1 ; $i++)
                                         <li class="presentationHide" style="display: none">
-                                                <div class="row">
-                                                    <div class="col-md-10 col-sm-8">
-                                                        @if($publicationPresentation[$i]->type === 'pdf')
-                                                            <i class="far fa-file-pdf text-danger mr-2"></i>
-                                                        @elseif(($publicationPresentation[$i]->type === 'doc') or ($publicationPresentation[$i]->type === 'docx'))
-                                                            <i class="far fa-file-word text-danger mr-2"></i>
-                                                        @elseif(($publicationPresentation[$i]->type === 'ppt') or ($publicationPresentation[$i]->type === 'pptx'))
-                                                            <i class="far fa-file-powerpoint text-danger mr-2"></i>
-                                                        @endif
-                                                        <a class=""
-                                                           href="{{ asset('storage/' . $publicationPresentation[$i]->url) }}"
-                                                           target="_blank">{{ $publicationPresentation[$i]->name }}</a>
-                                                    </div>
-                                                    <div class="col-md-2 col-sm-4">
-                                                        <button type="submit" class="btn btn-link "><i
-                                                                    class="fas fa-trash-alt text-danger"></i></button>
-                                                    </div>
+                                            <div class="row">
+                                                <div class="col-md-10 col-sm-8">
+                                                    @if($publicationPresentation[$i]->type === 'pdf')
+                                                        <i class="far fa-file-pdf text-danger mr-2"></i>
+                                                    @elseif(($publicationPresentation[$i]->type === 'doc') or ($publicationPresentation[$i]->type === 'docx'))
+                                                        <i class="far fa-file-word text-danger mr-2"></i>
+                                                    @elseif(($publicationPresentation[$i]->type === 'ppt') or ($publicationPresentation[$i]->type === 'pptx'))
+                                                        <i class="far fa-file-powerpoint text-danger mr-2"></i>
+                                                    @endif
+                                                    <a class=""
+                                                       href="{{ asset('storage/' . $publicationPresentation[$i]->url) }}"
+                                                       target="_blank">{{ $publicationPresentation[$i]->name }}</a>
                                                 </div>
+                                                <div class="col-md-2 col-sm-4">
+                                                    <button type="submit" class="btn btn-link "><i
+                                                                class="fas fa-trash-alt text-danger"></i></button>
+                                                </div>
+                                            </div>
                                         </li>
                                     @endfor
                                     <li>
@@ -188,8 +188,11 @@
 
         </div>
 
-        <a href="{{ route('publications.edit' , ['id' => $publication['id']]) }}" class="btn btn-info float-right mt-3"><span
-                    class="mr-2"><i class="fa fa-edit"></i></span>Edit publication</a>
+        @if($authorsDblpUrl->contains(Auth::user()->dblp_url))
+            <a href="{{ route('publications.edit' , ['id' => $publication['id']]) }}"
+               class="btn btn-info float-right mt-3"><span
+                        class="mr-2"><i class="fa fa-edit"></i></span>Edit publication</a>
+        @endif
 
     </div>
 

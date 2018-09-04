@@ -7,6 +7,7 @@
 
 require('./bootstrap');
 require('@fortawesome/fontawesome-free/js/all');
+require('jquery-ui/ui/widgets/autocomplete');
 
 window.Vue = require('vue');
 

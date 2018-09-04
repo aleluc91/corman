@@ -31,8 +31,9 @@ class PublicationController extends Controller
         $topics = $publication->topics;
 
         $authors = collect([]);
+        $authorsDblpUrl = collect([]);
         $authorsImage = collect([]);
-        $publication->authors->map(function($item, $key) use($authors , $authorsImage){
+        $publication->authors->map(function($item, $key) use($authors , $authorsDblpUrl, $authorsImage){
             $user = $item->user;
             if (!empty($user)) {
                 $authorsImage->push($user->avatar);
@@ -41,6 +42,7 @@ class PublicationController extends Controller
                 $authorsImage->push("avatar.jpg");
                 $authors->push(['author' => $item , 'active' => false]);
             }
+            $authorsDblpUrl->push($item->dblp_url);
         });
 
         $publicationImages = collect([]);
@@ -63,6 +65,7 @@ class PublicationController extends Controller
         return view('publications.show', compact(
             'publication',
             'authors',
+            'authorsDblpUrl',
             'authorsImage',
             'topics',
             'publicationImages' ,
