@@ -150,7 +150,7 @@
                 maxFileCount: 5,
                 overwriteInitial: false,
                 theme: 'explorer-fa',
-                uploadUrl: 'http://localhost/corman/public/multimedias/store',
+                uploadUrl: 'http://localhost/corman/public/multimedias',
                 previewFileIcon: '<i class="fa fa-file"></i>',
                 uploadExtraData: function () {
                     return {

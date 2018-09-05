@@ -14,14 +14,14 @@
                     @include('publications.includes.publication_card' , ['publication' => $publications[$i] , 'authors' => $authors[$i] , 'topics' => $topics[$i]])
                 @endfor
                 <div class="row justify-content-center">
-                    <div class="col-md-8">
+                    <div class="col-md-3">
                         {{$publications->links()}}
                     </div>
                 </div>
             </div>
 
             <div class="col-md-3">
-                <div class="card position-fixed">
+                <div class="card ">
                     <div class="card-body">
                         <h3>Your Group</h3>
                         <p>Test</p>

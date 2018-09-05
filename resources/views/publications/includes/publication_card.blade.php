@@ -72,7 +72,7 @@
 
             @if(!empty($authors))
             <ul class="list-inline">
-                @for($i = 0 ; $i <= count($authors) - 1 ; $i++)
+                @for($i = 0 ; $i <= count($authors['authors']) - 1 ; $i++)
                     <li class="list-inline-item">
                     @if($authors['authors'][$i]->dblp_url !== Auth::user()->dblp_url)
                         @if($authors['active'][$i] === true)

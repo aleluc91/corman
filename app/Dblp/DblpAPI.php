@@ -22,17 +22,31 @@ class DblpAPI
         var_dump($url);
         $jsonPublications = file_get_contents($url);
         $publications = json_decode($jsonPublications, true);
-        $publicationList = array();
+        $publicationList = collect([]);
         foreach ($publications['result']['hits']['hit'] as $hit) {
             $publication = new DblpPublication();
             $id = $hit['@id'];
             $publication->setId($id);
             $info = $hit['info'];
-            array_push($publicationList, self::filterInfo($info, $publication));
+            $publicationList->push(self::filterInfo($info, $publication));
         }
         return $publicationList;
     }
 
+    public static function getAuthors(string $authorName , string $authorLastName){
+        $authorName = self::formatData($authorName);
+        $authorLastName = self::formatData($authorLastName);
+        $url = "http://dblp.org/search/author/api?q={$authorName}_{$authorLastName}&format=json&h=1000";
+        $dblpAuthors = file_get_contents($url);
+        $authors = json_decode($dblpAuthors, false);
+        $dblpAuthors = collect([]);
+        if($authors->result->hits->{'@total'} !== 0)
+            foreach ($authors->result->hits->hit as $value) {
+                $author = ['author' => $value->info->{'author'} , 'url' => $value->info->{'url'}];
+                $dblpAuthors->push($author);
+            }
+        return $dblpAuthors;
+    }
 
     public static function getAuthorUrl($author)
     {

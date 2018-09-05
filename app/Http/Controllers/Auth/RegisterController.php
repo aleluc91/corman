@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -28,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/user';
 
     /**
      * Create a new controller instance.
@@ -75,4 +76,11 @@ class RegisterController extends Controller
             'lines_of_research' => $data['linesOfResearch']
         ]);
     }
+
+    protected function registered(Request $request, $user)
+    {
+        return redirect()->route('dblp.authors.index' , ['name' => $user->name , 'last_name' => $user->last_name]);
+    }
+
+
 }

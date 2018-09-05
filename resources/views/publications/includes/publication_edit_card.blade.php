@@ -168,8 +168,55 @@
     </div>
 </div>
 
+@push('body.scripts')
+<script type="text/javascript" src="{{asset('vendor/selectize.js/js/standalone/selectize.js')}}"></script>
 <script type="text/javascript">
     $(document).ready(function () {
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        window.setTimeout(function () {
+            $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 4000);
+
+        var option = [];
+        var optionId = [];
+
+
+        $.ajax({
+            url: "http://localhost/corman/public/topics/" + $('#publicationId').val() + "/get",
+            type: 'GET',
+            success: function (option) {
+                Object.keys(option.topics).forEach(function (key) {
+                    optionId.push(option.topics[key].id);
+                });
+                console.log(optionId);
+                $('#topics').selectize({
+                    plugins: ['remove_button'],
+                    maxItems: 5,
+                    delimiter: ',',
+                    items: optionId,
+                    highlight: true,
+                    dropdownParent: 'body',
+                    create: function (input) {
+                        return {
+                            value: input,
+                            text: input
+                        }
+                    }
+                });
+                console.log("Topic val" + $('#topics').val());
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
 
         $('#presentationShow').on('click', function () {
             $('.presentationHide').toggle('slow');
@@ -177,3 +224,4 @@
 
     })
 </script>
+@endpush

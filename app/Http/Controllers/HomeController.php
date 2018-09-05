@@ -47,6 +47,7 @@ class HomeController extends Controller
                         $localAuthorsActive->push(false);
                 });
                 $authors->push(['authors' => $localAuthors , 'active' => $localAuthorsActive]);
+
                 $topics->push($item->topics);
                 if (!$singleType->contains($item->type))
                     $singleType->push($item->type);

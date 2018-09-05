@@ -109,15 +109,15 @@
             switch($('#type').val()){
                 case "type" :
                     if(!$('#typeSelect').val() !== "none")
-                        window.location.href = 'publications/index/type/' + $('#typeSelect').val();
+                        window.location.href = 'publications/type/' + $('#typeSelect').val();
                     break;
                 case "topic" :
                     if(!$('#topicSelect').val() !== "none")
-                        window.location.href = 'publications/index/topic/' + $('#topicSelect').val();
+                        window.location.href = 'publications/topic/' + $('#topicSelect').val();
                     break;
                 case "year" :
                     if(!$('#yearSelect').val() !== "none")
-                        window.location.href = 'publications/index/year/' + $('#yearSelect').val();
+                        window.location.href = 'publications/year/' + $('#yearSelect').val();
                     break;
                     break;
             }
