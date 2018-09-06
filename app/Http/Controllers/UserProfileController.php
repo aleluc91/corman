@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 
-class UsersProfileController extends Controller
+class UserProfileController extends Controller
 {
 
     /**
-     * UsersProfileController constructor.
+     * UserProfileController constructor.
      */
     public function __construct()
     {
@@ -19,6 +19,17 @@ class UsersProfileController extends Controller
     public function index(){
         return view('users.index');
     }
+
+    public function show($id){
+        $user = User::find($id);
+        return view('users.show' , compact('user'));
+    }
+
+    public function edit($id){
+        $user = User::find($id);
+        return view('users.edit' , ['user' => $user]);
+    }
+
 
     public function update(Request $request , $id){
         $user = User::find($id);

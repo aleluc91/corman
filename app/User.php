@@ -25,7 +25,7 @@ class User extends Authenticatable
         'affiliation' ,
         'lines_of_research',
         'avatar' ,
-        'dblp_id',
+        'dblp_url',
         'privacy'
     ];
 

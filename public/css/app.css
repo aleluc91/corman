@@ -15342,6 +15342,15 @@ readers do not read off random characters that represent icons */
   border-radius: 50%;
 }
 
+.profile-card .avatar1 {
+  display: block;
+  max-width: 200px;
+  max-height: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+}
+
 .authors-card-image img {
   display: block;
   height: 30px;

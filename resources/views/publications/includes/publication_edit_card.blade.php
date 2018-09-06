@@ -1,3 +1,8 @@
+@push('styles')
+    <link rel="stylesheet" type="text/css" href="{{asset('vendor/selectize.js/css/selectize.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('vendor/selectize.js/css/selectize.default.css')}}"/>
+@endpush
+
 <div class="card bg-white shadow">
     <div class="card-header bg-white">
         <h4 class="text-center">Publication info</h4>
@@ -190,7 +195,7 @@
 
 
         $.ajax({
-            url: "http://localhost/corman/public/topics/" + $('#publicationId').val() + "/get",
+            url: "/topics/" + $('#publicationId').val() + "/get",
             type: 'GET',
             success: function (option) {
                 Object.keys(option.topics).forEach(function (key) {

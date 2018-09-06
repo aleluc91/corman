@@ -1,4 +1,3 @@
-
 <div class="card mb-3 shadow">
     <div class="card-body p-2">
         <p class="text-info">{{$publication->type}}</p>
@@ -38,7 +37,7 @@
         @endif
 
         <h6 class="text-info">Descritpion :</h6>
-        <p class="text-muted text-truncate">
+        <p class="text-muted ">
             @if(!empty($publication->description))
                 {{$publication->description}}
             @else
@@ -70,25 +69,26 @@
     <div class="card-footer bg-white p-2">
         <h6 class="text-info">Co-authors:</h6>
 
-            @if(!empty($authors))
+        @if(!empty($authors))
             <ul class="list-inline">
                 @for($i = 0 ; $i <= count($authors['authors']) - 1 ; $i++)
-                    <li class="list-inline-item">
                     @if($authors['authors'][$i]->dblp_url !== Auth::user()->dblp_url)
-                        @if($authors['active'][$i] === true)
-                            <a class="text-info" href="{{ route('authors.show' , array('id' => $authors['authors'][$i]->id )) }}">
-                                <i class="far fa-user mr-2 text-danger"></i>
-                                {{$authors['authors'][$i]->name}}
-                            </a>
-                        @else
+                        <li class="list-inline-item">
+                            @if($authors['active'][$i] === true)
+                                <a class="text-info"
+                                   href="{{ route('authors.show' , array('id' => $authors['authors'][$i]->id )) }}">
+                                    <i class="far fa-user mr-2 text-danger"></i>
+                                    {{$authors['authors'][$i]->name}}
+                                </a>
+                            @else
                                 <i class="far fa-user mr-2 text-danger"></i>
                                 <span class="text-muted">{{$authors['authors'][$i]->name}}</span>
-                        @endif
+                            @endif
+                        </li>
                     @endif
-                    </li>
                 @endfor
             </ul>
-            @endif
+        @endif
 
     </div>
 </div>

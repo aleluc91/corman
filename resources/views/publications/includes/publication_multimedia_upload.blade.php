@@ -27,7 +27,7 @@
     <!-- optionally if you need translation for your language then include  locale file as mentioned below -->
     <script type="text/javascript">
         $(document).ready(function () {
-            console.log($("input[name = '_token']").val());
+
             $('#filesToUpload').fileinput({
                 hideThumbnailContent: false, // hide image, pdf, text or other content in the thumbnail preview
                 minFileCount: 1,
@@ -44,7 +44,6 @@
                 },
                 allowedFileExtensions: ['jpg', 'jpeg', 'png', 'avi', 'mp4', 'mkv', 'mp3', 'pdf', 'doc', 'docx', 'ppt', 'pptx'],
                 maxFileSize: 10000,
-                maxFileCount: 5,
                 uploadAsync: false,
                 showUploadedThumbs: false,
                 preferIconicPreview: true, // this will force thumbnails to display icons for following file extensions
@@ -90,5 +89,6 @@
                 }
             });
         })
+
     </script>
 @endpush

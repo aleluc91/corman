@@ -2,10 +2,7 @@
 
 @section('content')
 
-    @push('styles')
-        <link rel="stylesheet" type="text/css" href="{{asset('vendor/selectize.js/css/selectize.css')}}"/>
-        <link rel="stylesheet" type="text/css" href="{{asset('vendor/selectize.js/css/selectize.default.css')}}"/>
-    @endpush
+
 
     <div class="container mt-3">
         @if(session('status'))

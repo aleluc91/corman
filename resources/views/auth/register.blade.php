@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@push('styles')
+    <link rel="stylesheet" type="text/css" href="{{asset('vendor/selectize.js/css/selectize.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('vendor/selectize.js/css/selectize.default.css')}}"/>
+@endpush
+
 @section('content')
     <div class="container mt-2">
         <div class="row justify-content-center">
@@ -62,7 +67,7 @@
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="password"><b>{{ __('Password') }}</b></label>
-                                    <input id="name" type="password"
+                                    <input id="password" type="password"
                                            class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}"
                                            name="password"
                                            placeholder="********">
@@ -97,9 +102,8 @@
                             <div class="form-group">
                                 <label for="linesOfResearch"><b>{{ __('Lines of research') }}</b></label>
                                 <input id="linesOfResearch" type="text"
-                                       class="form-control {{ $errors->has('linesOfResearch') ? 'is-invalid' : '' }}"
-                                       name="linesOfResearch"
-                                       placeholder="">
+                                       class="{{ $errors->has('linesOfResearch') ? 'is-invalid' : '' }}"
+                                       name="linesOfResearch">
                                 @if ($errors->has('linesOfResearch'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('linesOfResearch') }}</strong>
@@ -116,4 +120,28 @@
         </div>
     </div>
 @endsection
+
+@push('body.scripts')
+    <script type="text/javascript" src="{{asset('vendor/selectize.js/js/standalone/selectize.js')}}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $('#linesOfResearch').selectize({
+                plugins: ['remove_button'],
+                maxItems: 5,
+                delimiter: ',',
+                highlight: true,
+                dropdownParent: 'body',
+                create: function (input) {
+                    return {
+                        value: input,
+                        text: input
+                    }
+                }
+            });
+
+        });
+    </script>
+
+@endpush
 

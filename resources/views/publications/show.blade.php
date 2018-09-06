@@ -139,8 +139,8 @@
                             @if(!empty($authors))
                                 <ul class="list-inline">
                                     @foreach($authors as $author)
+                                        @if($author['author']->dblp_url !== Auth::user()->dblp_url)
                                         <li class="list-inline-item">
-                                            @if($author['author']->dblp_url !== Auth::user()->dblp_url)
                                                 @if($author['active'] === true)
                                                     <a class="text-info"
                                                        href="{{ route('authors.show' , array('id' => $author['author']->id )) }}">
@@ -151,8 +151,8 @@
                                                     <i class="far fa-user mr-2 text-danger"></i>
                                                     <span class="text-muted">{{$author['author']->name}}</span>
                                                 @endif
-                                            @endif
                                         </li>
+                                        @endif
                                     @endforeach
                                 </ul>
                             @endif

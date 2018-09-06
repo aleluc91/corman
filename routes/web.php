@@ -20,8 +20,15 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //Users
-Route::get('/users/index' , 'UsersProfileController@index')->name('users.index');
-Route::patch('/users/{user}' , 'UsersProfileController@update')->name('users.update');
+Route::get('/users/index' , 'UserProfileController@index')->name('users.index');
+Route::get('/users/{user}' , 'UserProfileController@show')->name('users.show');
+Route::get('/users/{user}/edit' , 'UserProfileController@edit')->name('users.edit');
+Route::patch('/users/{user}' , 'UserProfileController@update')->name('users.update');
+
+//ProfileImage
+Route::post('/users/image/{image}' , 'UserProfileImageController@store')->name('users.profie.image.store');
+Route::delete('/users/image/{image}' , 'UserProfileImageController@destroy')->name('users.profie.image.destroy');
+
 
 //DblpPublications
 Route::post('/dblp/store' , 'DblpController')->name("dblp.store");

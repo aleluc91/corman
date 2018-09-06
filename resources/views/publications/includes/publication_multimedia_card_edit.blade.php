@@ -150,7 +150,7 @@
                 maxFileCount: 5,
                 overwriteInitial: false,
                 theme: 'explorer-fa',
-                uploadUrl: 'http://localhost/corman/public/multimedias',
+                uploadUrl: '/multimedias',
                 previewFileIcon: '<i class="fa fa-file"></i>',
                 uploadExtraData: function () {
                     return {
@@ -160,7 +160,6 @@
                 },
                 allowedFileExtensions: ['jpg', 'jpeg', 'png', 'avi', 'mp4', 'mkv', 'mp3', 'pdf', 'doc', 'docx', 'ppt', 'pptx'],
                 maxFileSize: 10000,
-                maxFileCount: 5,
                 uploadAsync: false,
                 showUploadedThumbs: false,
                 preferIconicPreview: true, // this will force thumbnails to display icons for following file extensions
