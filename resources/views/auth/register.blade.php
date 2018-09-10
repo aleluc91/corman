@@ -111,7 +111,7 @@
                                 @endif
                             </div>
 
-                            <button type="submit" class="btn btn-primary m-2 float-right">Register</button>
+                            <button type="submit" class="btn btn-primary m-2 float-right">Sign up</button>
                         </form>
                     </div>
                 </div>

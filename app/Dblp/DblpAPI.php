@@ -40,7 +40,7 @@ class DblpAPI
         $dblpAuthors = file_get_contents($url);
         $authors = json_decode($dblpAuthors, false);
         $dblpAuthors = collect([]);
-        if($authors->result->hits->{'@total'} !== 0)
+        if($authors->result->hits->{'@total'} !== "0")
             foreach ($authors->result->hits->hit as $value) {
                 $author = ['author' => $value->info->{'author'} , 'url' => $value->info->{'url'}];
                 $dblpAuthors->push($author);
@@ -53,11 +53,13 @@ class DblpAPI
         $author = self::formatData($author);
         $url = "http://dblp.org/search/author/api?q={$author}&format=json";
         $dblpAuthor = file_get_contents($url);
-        $author = json_decode($dblpAuthor, true);
+        $author = json_decode($dblpAuthor, false);
         $dblpUrl = null;
-        foreach ($author['result']['hits']['hit'] as $value) {
-            $dblpUrl = $value['info']['url'];
-        }
+        if($author !== null)
+            if($author->result->hits->{'@total'} !== "0")
+                foreach ($author->{'result'}->{'hits'}->{'hit'} as $value) {
+                    $dblpUrl = $value->{'info'}->{'url'};
+                }
         return $dblpUrl;
     }
 

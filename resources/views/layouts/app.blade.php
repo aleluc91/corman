@@ -32,7 +32,7 @@
 
     @stack('styles')
 
-<!-- Scripts -->
+    <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     @stack('scripts')
 </head>

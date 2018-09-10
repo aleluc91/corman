@@ -9,33 +9,30 @@
 
     </select>
     <select class="custom-select" id="typeSelect" hidden>
-        <option value="none">Select a value...</option>
         @if($singleType->isNotEmpty())
             @foreach($singleType as $type)
                 <option value="{{$type}}">{{$type}}</option>
             @endforeach
         @else
-            <option value="noValues">No values...</option>
+            <option value="noValues">No values</option>
         @endif
     </select>
     <select class="custom-select" id="topicSelect" hidden>
-        <option value="none">Select a value...</option>
         @if($singleTopic->isNotEmpty())
             @foreach($singleTopic as $topic)
                 <option value="{{$topic->name}}">{{$topic->name}}</option>
             @endforeach
         @else
-            <option value="noValues">No values...</option>
+            <option value="noValues">No values</option>
         @endif
     </select>
     <select class="custom-select" id="yearSelect" hidden>
-        <option value="none">Select a value...</option>
         @if($singleYear->isNotEmpty())
             @foreach($singleYear as $year)
                 <option value="{{$year}}">{{$year}}</option>
             @endforeach
         @else
-            <option value="noValues">No values...</option>
+            <option value="noValues">No values</option>
         @endif
     </select>
     <div class="input-group-append">
@@ -50,6 +47,52 @@
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('#type').on('create', function () {
+                value = $(this).val();
+                noneSelect = $('#noneSelect');
+                typeSelect = $('#typeSelect');
+                topicSelect = $('#topicSelect');
+                yearSelect = $('#yearSelect');
+                switch ($(this).val()) {
+                    case "none" :
+                        noneSelect.attr('hidden', false);
+                        typeSelect.attr('hidden', true);
+                        topicSelect.attr('hidden', true);
+                        yearSelect.attr('hidden', true);
+                        break;
+                    case "type" :
+                        if (typeSelect.val() === 'noValues')
+                            typeSelect.attr('disabled', true);
+                        else
+                            typeSelect.attr('disabled', false);
+                        noneSelect.attr('hidden', true);
+                        typeSelect.attr('hidden', false);
+                        topicSelect.attr('hidden', true);
+                        yearSelect.attr('hidden', true);
+                        break;
+                    case "topic" :
+                        if (topicSelect.val() === 'noValues')
+                            topicSelect.attr('disabled', true);
+                        else
+                            topicSelect.attr('disabled', false);
+                        noneSelect.attr('hidden', true);
+                        typeSelect.attr('hidden', true);
+                        topicSelect.attr('hidden', false);
+                        yearSelect.attr('hidden', true);
+                        break;
+                    case "year" :
+                        if (yearSelect.val() === 'noValues')
+                            yearSelect.attr('disabled', true);
+                        else
+                            yearSelect.attr('disabled', false);
+                        noneSelect.attr('hidden', true);
+                        typeSelect.attr('hidden', true);
+                        topicSelect.attr('hidden', true);
+                        yearSelect.attr('hidden', false);
+                        break;
                 }
             });
 
@@ -97,22 +140,21 @@
                         yearSelect.attr('hidden', false);
                         break;
                 }
-
-            })
+            });
 
             $('#btnSubmit').on('click', function () {
                 switch ($('#type').val()) {
                     case "type" :
                         if (!$('#typeSelect').val() !== "none")
-                            window.location.href = 'publications/type/' + $('#typeSelect').val();
+                            window.location.href = '/publications/type/' + $('#typeSelect').val();
                         break;
                     case "topic" :
                         if (!$('#topicSelect').val() !== "none")
-                            window.location.href = 'publications/topic/' + $('#topicSelect').val();
+                            window.location.href = '/publications/topic/' + $('#topicSelect').val();
                         break;
                     case "year" :
                         if (!$('#yearSelect').val() !== "none")
-                            window.location.href = 'publications/year/' + $('#yearSelect').val();
+                            window.location.href = '/publications/year/' + $('#yearSelect').val();
                         break;
                         break;
                 }

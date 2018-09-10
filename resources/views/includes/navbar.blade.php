@@ -1,5 +1,5 @@
 <nav class="navbar fixed-top navbar-laravel navbar-expand-md navbar-light shadow">
-    <div class="container">
+    <div class="container-fluid">
         @guest
             <a class="navbar-brand text-white" style="text-transform: uppercase ; font-weight: 700;"
                href="{{ route('welcome') }}">
@@ -23,16 +23,21 @@
             @auth
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link h5" href="{{ route('home') }}">Home <span
+                        <a class="nav-link h5" href="{{ route('home') }}">Home<span
+                                    class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link h5" href="{{ route('groups.index') }}">Groups<span
                                     class="sr-only">(current)</span></a>
                     </li>
                 </ul>
 
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" id="search" type="text" placeholder="Search" autocomplete="off">
-                    <button id="btnSearch" class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                    <button id="btnSearch" class="btn btn-outline-light my-2 my-sm-0" type="submit"><i
+                                class="fas fa-search"></i></button>
                 </form>
-            @endauth
+        @endauth
 
 
         <!-- Right Side Of Navbar -->
@@ -41,8 +46,9 @@
                 @guest
                     <li class="nav-item">
                         <form class="form-inline">
-                            <a href="{{ route('login') }}" class="btn btn-outline-light m-2" style="text-transform: uppercase;">
-                                Login
+                            <a href="{{ route('login') }}" class="btn btn-outline-light m-2"
+                               style="text-transform: uppercase;">
+                                Login<i class="fas fa-sign-in-alt ml-2"></i>
                             </a>
                         </form>
                     </li>
@@ -51,9 +57,23 @@
                     {{--<li class="nav-item">
                        <img class="rounded-circle" src="{{ asset('storage/' . Auth::user()->avatar) }}" style="height:50px; width:50px;">
                     </li>--}}
+                    <li class="nav-item mr-2">
+                        <button class="btn btn-outline-light btn-sm" data-toggle="modal" data-target="#notificationModal">
+                            <div class="fa-2x">
+                                <span class="fa-layers fa-fw">
+                                <i class="fas fa-bell"></i>
+                                    @if($registrationNotifications->isNotEmpty())
+                                        <span class="fa-layers-counter"
+                                              style="background:Tomato">{{ $registrationNotifications->count() }}</span>
+                                    @endif
+                            </span>
+                            </div>
+                        </button>
+                    </li>
+
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle h5" href="#" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{ Auth::user()->name }}  {{Auth::user()->last_name}}<span class="caret"></span>
                         </a>
 
@@ -77,6 +97,35 @@
     </div>
 </nav>
 
+<div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="notificationModalLabel">Notification</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @if($registrationNotifications->isNotEmpty())
+                    @for($i = 0 ; $i <= count($registrationNotifications) - 1; $i++)
+                        @include('notifications.includes.registration_notifications_card' , [
+                            'registrationNotification' => $registrationNotifications[$i],
+                            'groupPending' => $groupsPending[$i],
+                            'userBy' => $usersBy[$i]
+                        ])
+                    @endfor
+                @else
+                    <div class="card-bg-white">
+                        <div class="card-body">
+                            <h3>You have no notifications</h3>
+                        </div>
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
 
 
 @push('body.scripts')
@@ -94,7 +143,7 @@
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
                 datumTokenizer: Bloodhound.tokenizers.whitespace,
                 remote: {
-                    url: 'http://localhost/corman/public/search/autocomplete/topics/%QUERY%',
+                    url: '/search/autocomplete/topics/%QUERY%',
                     wildcard: '%QUERY%'
                 }
             });
@@ -114,9 +163,44 @@
             $('#btnSearch').on('click', function (e) {
                 e.preventDefault();
                 if ($('#search').val())
-                    window.location.href = "http://localhost/corman/public/search/" + $('#search').val();
+                    window.location.href = "/search/" + $('#search').val();
             })
+
+            var userEngine = new Bloodhound({
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                datumTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/search/autocomplete/users/%QUERY%',
+                    wildcard: '%QUERY%'
+                }
+            });
+
+            $('#searchUser').typeahead(
+                {
+                    minLength: 2,
+                    highlight: true
+                },
+                {
+                    name: 'users',
+                    source: userEngine,
+                    displayKey: function (user) {
+                        return user.name + ' ' + user.last_name;
+                    }
+                }
+            );
+
+            $('#btnSearchUser').on('click', function (e) {
+                e.preventDefault();
+                if ($('#searchUser').val() && $('#groupId').val())
+                    window.location.href = "/search/groups/users/" + $('#searchUser').val() + "/" + $('#groupId').val();
+
+            })
+
 
         });
     </script>
 @endpush
+
+
+
+

@@ -42,8 +42,6 @@ class DblpPublicationsSeeder extends Seeder
                 }
                 $publication = Publication::find($publicationId);
                 $publication->authors()->attach($authors);
-                $topics = factory(\App\Topic::class , 3)->create();
-                $publication->topics()->attach($topics);
             }
         }
     }

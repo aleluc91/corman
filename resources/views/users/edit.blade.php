@@ -20,71 +20,113 @@
         @endif
         <div class="row justify-content-center">
             <div class="col-12 col-md-12 col-md-12 col-lg-12">
+                <form method="POST" action="{{ route('users.update') }}"
+                      enctype="multipart/form-data">
+                    @csrf
+                    @method('PATCH')
+                    <div class="row">
 
-                <div class="row">
-                    <div class="col-12 col-sm-12 col-md-7 col-lg-7">
-                        <div class="card bg-white shadow">
-                            <div class="card-body">
-                                <form method="POST" action="{{ route('users.update' , ['id' => $user->id]) }}">
-                                    @csrf
-                                    @method('PATCH')
+                        <div class="col-12 col-sm-12 col-md-7 col-lg-7">
+                            <div class="card bg-white shadow">
+                                <div class="card-body">
 
                                     <div class="row">
                                         <div class="col-md-6 col-sm-12 form-group">
                                             <label class="text-info" for="name">Name</label>
-                                            <input type="text" class="form-control" id="name" name="name"
+                                            <input type="text"
+                                                   class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
+                                                   id="name" name="name"
                                                    value=" {{ $user->name }}"
                                                    autofocus>
+                                            @if ($errors->has('name'))
+                                                <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('name') }}</strong>
+                                            </span>
+                                            @endif
                                         </div>
                                         <div class="col-md-6 col-sm-12 form-group">
                                             <label class="text-info" for="lastName">Last name</label>
-                                            <input type="text" class="form-control" id="lastName" name="lastName"
-                                                   value="{{ $user->last_name }}">
+                                            <input type="text"
+                                                   class="form-control {{ $errors->has('lastName') ? 'is-invalid' : '' }}"
+                                                   id="lastName" name="lastName"
+                                                   value=" {{ $user->last_name }}">
+                                            @if ($errors->has('lastName'))
+                                                <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('lastName') }}</strong>
+                                            </span>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="text-info" for="email">Email</label>
-                                        <input type="email" class="form-control" id="email" name="email"
+                                        <input type="email"
+                                               class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
+                                               id="email" name="email"
                                                value=" {{ $user->email }}">
+                                        @if ($errors->has('email'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('email') }}</strong>
+                                            </span>
+                                        @endif
                                     </div>
                                     <div class="form-group">
                                         <label class="text-info" for="dateOfBirth">Date of birth</label>
-                                        <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth"
+                                        <input type="date"
+                                               class="form-control {{ $errors->has('lastName') ? 'is-invalid' : '' }}"
+                                               id="dateOfBirth" name="dateOfBirth"
                                                value="{{ $user->date_of_birth }}">
+                                        @if ($errors->has('dateOfBirth'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('dateOfBirth') }}</strong>
+                                            </span>
+                                        @endif
                                     </div>
                                     <div class="form-group">
                                         <label class="text-info" for="country">Country</label>
-                                        <select id="country" class="form-control" name="country">
-                                            <option>Select your country...</option>
-                                            <option>Italy</option>
+                                        <select id="country" class="{{ $errors->has('country') ? 'is-invalid' : '' }}"
+                                                name="country" value="{{ $user->country }}">
+                                            <option value="{{ $user->country }}">{{ $user->country }}</option>
                                         </select>
+                                        @if ($errors->has('country'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('country') }}</strong>
+                                            </span>
+                                        @endif
                                     </div>
                                     <div class="form-group">
                                         <label class="text-info" for="gender">Gender</label>
-                                        <select id="gender" class="form-control" name="gender">
-                                            @if(empty($user->gender))
-                                                <option selected>Select your gender...</option>
-                                                <option value="Male">Male</option>
-                                                <option value="Female">Female</option>
-                                            @elseif($user->gender === 'Male')
-                                                <option>Select your gender...</option>
+                                        <select id="gender"
+                                                class="form-control {{ $errors->has('gender') ? 'is-invalid' : '' }}"
+                                                name="gender">
+                                            @if($user->gender === 'Male')
                                                 <option value="Male" selected>Male</option>
                                                 <option value="Female">Female</option>
                                             @else
-                                                <option>Select your gender...</option>
                                                 <option value="Male">Male</option>
                                                 <option value="Female" selected>Female</option>
                                             @endif
                                         </select>
+                                        @if ($errors->has('gender'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('gender') }}</strong>
+                                            </span>
+                                        @endif
                                     </div>
                                     <div class="form-group">
-                                        <label class="text-info" for="dateOfBirth">Affiliation</label>
-                                        <input type="text" class="form-control" id="affiliation" name="affiliation"
+                                        <label class="text-info" for="affiliation">Affiliation</label>
+                                        <input type="text"
+                                               class="form-control {{ $errors->has('affiliation') ? 'is-invalid' : '' }}"
+                                               id="affiliation" name="affiliation"
                                                value="{{ $user->affiliation }}">
+                                        @if ($errors->has('affiliation'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('affiliation') }}</strong>
+                                            </span>
+                                        @endif
                                     </div>
                                     <div class="form-group">
-                                        {{ $user->lines_of_research }}
-                                        <label class="text-info" for="linesOfResearch">{{ __('Lines of research') }}</label>
+                                        <label class="text-info"
+                                               for="linesOfResearch">{{ __('Lines of research') }}</label>
                                         <input id="linesOfResearch" type="text"
                                                class="{{ $errors->has('linesOfResearch') ? 'is-invalid' : '' }}"
                                                name="linesOfResearch" value="{{ $user->lines_of_research }}">
@@ -94,38 +136,39 @@
                                             </span>
                                         @endif
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Edit</button>
+                                    <button type="submit" class="btn btn-primary float-right">Update<i
+                                                class="far fa-edit ml-2"></i></button>
 
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-12 col-md-5 col-lg-5">
-                        <div class="card bg-white shadow">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="profile-card mb-2">
-                                            <img class="avatar1" src="{{ asset('storage/' . $user->avatar) }}">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <h4 class="text-center">Upload a new image</h4>
-                                        <div class="mt-3">
-                                            <input id="userId" value="{{ $user->id }}" type="hidden">
-                                            <input type="file" id="imageToUpload" name="image"
-                                                   multiple data-show-caption="true"
-                                                   data-msg-placeholder="Select image for upload...">
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-12 col-sm-12 col-md-5 col-lg-5">
+                            <div class="card bg-white shadow">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="profile-card mb-2">
+                                                <img class="avatar1" src="{{ asset('storage/' . $user->avatar) }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h4 class="text-center">Upload a new image</h4>
+                                            <div class="mt-3">
+                                                <input id="userId" value="{{ $user->id }}" type="hidden">
+                                                <input type="file" id="imageToUpload" name="image"
+                                                       multiple data-show-caption="true"
+                                                       data-msg-placeholder="Select image for upload..."
+                                                       data-show-upload="false">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -161,6 +204,31 @@
                     }
                 }
             });
+
+
+            $('#country').selectize({
+                maxItems: 1,
+                valueField: 'name',
+                labelField: 'name',
+                searchField: ['name'],
+                options: [],
+                create: false,
+                load: function (query, callback) {
+                    $.ajax({
+                        url: '/storage/json/countries.json',
+                        type: 'GET',
+                        error: function () {
+                            console.log('error');
+                            callback();
+                        },
+                        success: function (res) {
+                            console.log(res);
+                            callback(res);
+                        }
+                    });
+                },
+            });
+
 
             $('#imageToUpload').on('filebatchuploadsuccess', function (event, data) {
                 console.log('File batch upload success');

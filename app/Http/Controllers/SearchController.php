@@ -73,6 +73,44 @@ class SearchController extends Controller
         return view('search.index_users', compact('users'));
     }
 
+    public function searchUsers($userId , $value){
+        $users = User::where('id' , '!=' , $userId)
+            ->where('name' , 'like' , '%' . $value . '%')
+            ->orWhere('last_name' , 'like' , '%' . $value . '%')
+            ->get();
+        return response()->json(['users' => $users]);
+    }
+
+    public function searchGroupsUsers($value , $groupId)
+    {
+        $names = explode(" ", $value);
+        $users = User::with('groupsRegistrationNotifications')
+        ->where(function($query) use($names){
+                $query->whereIn('name' , $names);
+                $query->orWhere(function($query) use($names){
+                    $query->whereIn('last_name' , $names);
+                });
+            })->paginate(10);
+
+        $pendings = collect([]);
+        $users->each(function($item , $key) use($pendings , $groupId){
+            if($item->groupsRegistrationNotifications()->exists()) {
+                $item->groupsRegistrationNotifications->map(function ($item, $key) use ($pendings , $groupId) {
+                    if ($item->group_id === $groupId)
+                        $pendings->push(true);
+                    else
+                        $pendings->push(false);
+                });
+            }else
+                $pendings->push(false);
+        });
+
+        return view('search.search_groups_users', compact(
+            'users' ,
+            'groupId',
+            'pendings'));
+    }
+
     public function indexPublications($value)
     {
         $publications = Publication::with('authors', 'topics')
@@ -110,6 +148,15 @@ class SearchController extends Controller
     {
         $topics = Topic::select('name')->where('name', 'like', '%' . $query . '%')->get();
         return response()->json($topics);
+    }
+
+    public function autoCompleteUsers($query)
+    {
+        $user = User::select('name' , 'last_name')
+            ->where('name', 'like', '%' . $query . '%')
+            ->orWhere('last_name', 'like', '%' . $query . '%')
+            ->get();
+        return response()->json($user);
     }
 
 }

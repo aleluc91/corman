@@ -40,8 +40,19 @@ class AuthorController extends Controller
                 $topics->push($item->topics);
             });
         }
+
+        $groups = collect([]);
+        if($user->groups->isNotEmpty())
+            $groups = $user->groups;
+
         $publications = $publications->paginate(10);
-        return view('authors.show' , compact('user' , 'publications' , 'authors' , 'topics'));
+        return view('authors.show' , compact(
+            'user' ,
+            'publications' ,
+            'authors' ,
+            'topics',
+            'groups'
+        ));
     }
 
 }

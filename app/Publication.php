@@ -37,4 +37,8 @@ class Publication extends Model
         return $this->hasMany(Multimedia::class);
     }
 
+    public function groups(){
+        return $this->belongsToMany(Group::class , 'group_publication');
+    }
+
 }

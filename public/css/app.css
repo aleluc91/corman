@@ -15429,3 +15429,10 @@ body {
   border-bottom: 1px solid #00adb5;
 }
 
+.badge-notify {
+  background: red;
+  position: relative;
+  top: 0px;
+  left: -15px;
+}
+

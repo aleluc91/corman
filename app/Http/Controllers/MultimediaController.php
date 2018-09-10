@@ -92,7 +92,6 @@ class MultimediaController extends Controller
     public function destroy($id)
     {
         $multimedia = Multimedia::find($id);
-        $path = public_path() . '/' . $multimedia->url;
         Storage::disk('public')->delete($multimedia->url);
         $multimedia->delete();
         return redirect()->back()->with('status', 'Success! The file you have selected has been deleted' );

@@ -43,4 +43,12 @@ class User extends Authenticatable
         return $this->hasOne('App\Author' , 'dblp_url' , 'dblp_url');
     }
 
+    public function groups(){
+        return $this->belongsToMany(Group::class , 'group_user')->withPivot('role');
+    }
+
+    public function groupsRegistrationNotifications(){
+        return $this->hasMany('\App\GroupRegistrationNotification');
+    }
+
 }

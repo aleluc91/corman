@@ -2,18 +2,6 @@
 
 @section('content')
 
-    @push('styles')
-        <link rel="stylesheet" href="{{ asset('css/tagInput.css') }}">
-    @endpush
-
-    @push('scripts')
-        <script src=" {{ asset('js/tagInput.js') }}"></script>
-        <script>
-            $(document).ready(function(){
-                $('#tags').tagInput({labelClass:"badge badge-success"});
-            });
-        </script>
-    @endpush
 
     <div class="container my-2">
         <div class="row user-profile">

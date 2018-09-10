@@ -17,7 +17,16 @@
         @endif
         <h4 class="text-info">{{$publication->type}}</h4>
         <h3>{{$publication->title}}</h3>
+        <div class="row justify-content-end">
+            <div class="col-auto">
+                @if($authorsDblpUrl->contains(Auth::user()->dblp_url))
+                    <a href="{{ route('publications.edit' , ['id' => $publication['id']]) }}"
+                       class="btn btn-info float-right mt-3">Edit publication<i class="fa fa-edit ml-2"></i></a>
+                @endif
+            </div>
+        </div>
         <div class="row mt-3">
+
             <div class="col-md-6">
                 <div class="card bg-white shadow">
                     <div class="card-header bg-white">
@@ -82,7 +91,7 @@
                                                     @endif
                                                     <a class="mr-3"
                                                        href="{{ asset('storage/' . $multimedia->url) }}"
-                                                       target="_blank">{{ $ultimedias->name }}</a>
+                                                       target="_blank">{{ $multimedia->name }}</a>
                                                 </div>
                                                 <div class="col-md-2 col-sm-4">
                                                     <button type="submit" class="btn btn-link "><i
@@ -140,7 +149,7 @@
                                 <ul class="list-inline">
                                     @foreach($authors as $author)
                                         @if($author['author']->dblp_url !== Auth::user()->dblp_url)
-                                        <li class="list-inline-item">
+                                            <li class="list-inline-item">
                                                 @if($author['active'] === true)
                                                     <a class="text-info"
                                                        href="{{ route('authors.show' , array('id' => $author['author']->id )) }}">
@@ -151,7 +160,7 @@
                                                     <i class="far fa-user mr-2 text-danger"></i>
                                                     <span class="text-muted">{{$author['author']->name}}</span>
                                                 @endif
-                                        </li>
+                                            </li>
                                         @endif
                                     @endforeach
                                 </ul>
@@ -172,12 +181,6 @@
             </div>
 
         </div>
-
-        @if($authorsDblpUrl->contains(Auth::user()->dblp_url))
-            <a href="{{ route('publications.edit' , ['id' => $publication['id']]) }}"
-               class="btn btn-info float-right mt-3"><span
-                        class="mr-2"><i class="fa fa-edit"></i></span>Edit publication</a>
-        @endif
 
     </div>
 

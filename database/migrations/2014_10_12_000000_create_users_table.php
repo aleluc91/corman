@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->char('gender')->nullable();
             $table->string('affiliation');
             $table->string('lines_of_research');
-            $table->string('avatar')->default('avatar.jpg');
+            $table->string('avatar')->default('users_image/default_avatar.png');
             $table->string('privacy')->default('public');
             $table->string('dblp_url')->nullable();
             $table->rememberToken();
