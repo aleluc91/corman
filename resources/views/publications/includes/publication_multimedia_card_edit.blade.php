@@ -6,8 +6,8 @@
 @endpush
 
 <div class="row">
-    <div class="card bg-white shadow w-100">
-        <div class="card-header bg-white">
+    <div class="card shadow w-100">
+        <div class="card-header">
             <h4 class="text-center">Publication Multimedia</h4>
         </div>
         <div class="card-body">
@@ -19,11 +19,11 @@
                         <div class="row border p-2 mb-2">
                             <div class="col-md-2 col-sm-2 align-self-center">
                                 @if(($multimedia->type === 'image/png') or ($multimedia->type === 'image/jpeg') or ($multimedia->type === 'image/jpg'))
-                                    <i class="fas fa-file-image fa-3x text-danger"></i>
+                                    <i class="fas fa-file-image fa-3x text-primary"></i>
                                 @elseif(($multimedia->type === 'video/mkv') or ($multimedia->type === 'video/avi') or ($multimedia->type === 'video/mp4'))
-                                    <i class="fas fa-file-video fa-3x text-danger"></i>
+                                    <i class="fas fa-file-video fa-3x text-primary"></i>
                                 @elseif($multimedia->type === 'audio/mpeg')
-                                    <i class="fas fa-file-audio fa-3x text-danger"></i>
+                                    <i class="fas fa-file-audio fa-3x text-primary"></i>
                                 @endif
                             </div>
                             <div class="col-md-8 col-sm-8 align-self-center">
@@ -31,7 +31,7 @@
                             </div>
                             <div class="col-md-2 col-sm-2 align-self-sm-end">
                                 <!-- Button trigger modal -->
-                                <button class="btn btn-link text-info" type="button" class="btn btn-primary"
+                                <button class="btn btn-link text-primary" type="button"
                                         data-toggle="modal" data-target="#fileModal{{ $multimedia->id }}">
                                     <i class="fas fa-search-plus"></i>
                                 </button>

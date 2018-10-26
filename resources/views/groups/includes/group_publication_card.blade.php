@@ -1,9 +1,9 @@
 <div class="card my-2 shadow">
-    <div class="card-body p-2">
-        <p class="text-info">{{$publication->type}}</p>
-        <div class="publication-card-link">
+    <div class="card-header">
+        <p class="text-dark">{{$publication->type}}</p>
+        <div>
             <h4>
-                <a href="{{ route('publications.show' , ['id' => $publication->id]) }}">{{$publication->title}}</a>
+                <a class="text-primary" style="text-transform: uppercase;" href="{{ route('publications.show' , ['id' => $publication->id]) }}">{{$publication->title}}</a>
             </h4>
         </div>
 
@@ -26,12 +26,12 @@
             <p class="text-secondary">
                 <span>{{$publication->venue}}</span>
                 <span class="ml-1">{{$publication->year}}</span>
-                @if(!empty($publication->volume))
+                {{--@if(!empty($publication->volume))
                     <span class="ml-1">{{$publication->volume}}</span>
                 @endif
                 @if(!empty($publication->number))
                     <span class="ml-1">({{$publication->number}})</span>
-                @endif
+                @endif--}}
                 @if(!empty($publication->pages))
                     <span class="ml-1"> : {{$publication->pages}}</span>
                 @endif
@@ -68,8 +68,8 @@
             </p>
 
         @elseif($publication->type === "Books and Theses")
-            @if(!empty($publication->venue))
-                <p>
+            <p>
+                @if(!empty($publication->venue))
                     <span>{{$publication->venue}}</span>
                     @if(!empty($publication->volume))
                         <span class="ml-1">{{$publication->volume}}</span>
@@ -78,15 +78,18 @@
                         <span class="ml-1">{{$publication->publisher}}</span>
                     @endif
                     <span class="ml-1">{{$publication->year}}</span>
-                </p>
-            @else
-                <p class="text-secondary">
-                    <span class="ml-1">{{$publication->year}}</span>
-                </p>
-            @endif
+            </p>
+        @else
+            <p class="text-secondary">
+                <span class="ml-1">{{$publication->year}}</span>
+            </p>
+        @endif
         @endif
 
-        <h6 class="text-info">Descritpion :</h6>
+    </div>
+    <div class="card-body ">
+
+        <h6 class="text-dark">Descritpion :</h6>
         <p class="text-muted ">
             @if(!empty($publication->description))
                 {{$publication->description}}
@@ -95,29 +98,29 @@
             @endif
         </p>
 
-        <h6 class="text-info">Link :
+        <h6 class="text-dark">Link :
             @if(!empty($publication->ee))
-                <a class="text-muted" href="{{$publication->ee}}">{{$publication->ee}}</a>
+                <a class="text-info" href="{{$publication->ee}}">{{$publication->ee}}</a>
             @else
                 <span class="text-muted">This publication has no external link.</span>
             @endif
         </h6>
 
-        <h6 class="text-info">Topics :</h6>
+        <h6 class="text-dark">Topics :</h6>
         <div>
             @if($topics->isNotEmpty())
                 @foreach($topics as $topic)
                     <h5 class="d-inline"><span class="badge badge-info">{{$topic->name}}</span></h5>
                 @endforeach
             @else
-                <p>This publication has no topic</p>
+                <p class="text-muted">This publication has no topic</p>
             @endif
         </div>
 
 
     </div>
-    <div class="card-footer bg-white p-2">
-        <h6 class="text-info">Co-authors:</h6>
+    <div class="card-footer ">
+        <h6 class="text-dark">Co-authors:</h6>
 
         @if(!empty($authors))
             <ul class="list-inline">
@@ -125,13 +128,13 @@
                     @if($authors['authors'][$i]->dblp_url !== Auth::user()->dblp_url)
                         <li class="list-inline-item">
                             @if($authors['active'][$i] === true)
-                                <a class="text-info"
+                                <a class="text-primary"
                                    href="{{ route('authors.show' , array('id' => $authors['authors'][$i]->id )) }}">
-                                    <i class="far fa-user mr-2 text-danger"></i>
+                                    <i class="far fa-user mr-2 text-dark"></i>
                                     {{$authors['authors'][$i]->name}}
                                 </a>
                             @else
-                                <i class="far fa-user mr-2 text-danger"></i>
+                                <i class="far fa-user mr-2 text-muted"></i>
                                 <span class="text-muted">{{$authors['authors'][$i]->name}}</span>
                             @endif
                         </li>
@@ -139,6 +142,7 @@
                 @endfor
             </ul>
         @endif
+
         @if(($role === 'super_administrator') or ($role === 'administrator'))
             <button class="btn btn-danger float-right" data-toggle="modal" data-target="#deletePublicationModal"><i
                         class="fa fa-trash-alt mr-2"></i>Delete
@@ -173,6 +177,6 @@
                 </div>
             </div>
         @endif
+
     </div>
 </div>
-

@@ -3,8 +3,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('vendor/selectize.js/css/selectize.default.css')}}"/>
 @endpush
 
-<div class="card bg-white shadow">
-    <div class="card-header bg-white">
+<div class="card shadow">
+    <div class="card-header">
         <h4 class="text-center">Publication info</h4>
     </div>
     <div class="card-body">
@@ -13,7 +13,7 @@
             @method('PATCH')
             <input id="publicationId" type="hidden" value="{{ $publication->id }}">
             <div class="form-group">
-                <label class="text-info" for="type">Type of publication</label>
+                <label class="text-dark" for="type">Type of publication</label>
                 <select class="custom-select {{ $errors->has('type') ? 'is-invalid' : '' }}" name="type" id="type"
                         value="{{ $publication->type }}">
                     <option @if($publication->type === 'Journal Articles') selected @endif >Journal Articles</option>
@@ -35,7 +35,7 @@
                 @endif
             </div>
             <div class="form-group">
-                <label class="text-info" for="title">Title</label>
+                <label class="text-dark" for="title">Title</label>
                 <input type="text" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" id="title"
                        name="title" value="{{$publication->title}}">
                 @if ($errors->has('title'))
@@ -45,7 +45,7 @@
                 @endif
             </div>
             <div class="form-group">
-                <label class="text-info" for="venue">Venue</label>
+                <label class="text-dark" for="venue">Venue</label>
                 <input type="text" class="form-control {{ $errors->has('venue') ? 'is-invalid' : '' }}" id="venue"
                        name="venue" value="{{$publication->venue}}">
                 @if ($errors->has('venue'))
@@ -58,7 +58,7 @@
             </div>
             <div class="row">
                 <div class="col-md-3 form-group">
-                    <label class="text-info" for="volume">Volume</label>
+                    <label class="text-dark" for="volume">Volume</label>
                     <input type="text" class="form-control {{ $errors->has('volume') ? 'is-invalid' : '' }}" id="volume"
                            name="volume" value="{{$publication->volume}}">
                     @if ($errors->has('volume'))
@@ -68,7 +68,7 @@
                     @endif
                 </div>
                 <div class="col-md-3 form-group">
-                    <label class="text-info" for="number">Number</label>
+                    <label class="text-dark" for="number">Number</label>
                     <input type="text" class="form-control {{ $errors->has('number') ? 'is-invalid' : '' }}" id="number"
                            name="number" value="{{$publication->number}}">
                     @if ($errors->has('number'))
@@ -78,7 +78,7 @@
                     @endif
                 </div>
                 <div class="col-md-3 form-group">
-                    <label class="text-info" for="pages">Pages</label>
+                    <label class="text-dark" for="pages">Pages</label>
                     <input type="text" class="form-control {{ $errors->has('pages') ? 'is-invalid' : '' }}" id="pages"
                            name="pages" value="{{$publication->pages}}">
                     @if ($errors->has('pages'))
@@ -88,7 +88,7 @@
                     @endif
                 </div>
                 <div class="col-md-3 form-group">
-                    <label class="text-info" for="year">Year</label>
+                    <label class="text-dark" for="year">Year</label>
                     <input type="text" class="form-control {{ $errors->has('year') ? 'is-invalid' : '' }}" id="year"
                            name="year" value="{{$publication->year}}">
                     @if ($errors->has('year'))
@@ -99,7 +99,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="text-info" for="publisher">Publisher</label>
+                <label class="text-dark" for="publisher">Publisher</label>
                 <input type="text" class="form-control {{ $errors->has('publisher') ? 'is-invalid' : '' }}"
                        id="publisher" name="publisher"
                        value="{{$publication->publisher}}">
@@ -110,7 +110,7 @@
                 @endif
             </div>
             <div class="form-group">
-                <label class="text-info" for="topic">Topic</label>
+                <label class="text-dark" for="topic">Topic</label>
                 <select class="{{ $errors->has('topics[]') ? 'is-invalid' : '' }}" name="topics[]" id="topics" multiple>
                     @foreach($allTopics as $topic)
                         <option value="{{ $topic->name }}">{{ $topic->name }}</option>
@@ -123,7 +123,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label class="text-info" for="description">Description</label>
+                <label class="text-dark" for="description">Description</label>
                 <textarea class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" name="description" id="description" cols="30"
                           rows="5">{{ $publication->description }}</textarea>
                 @if ($errors->has('description'))
@@ -133,7 +133,7 @@
                 @endif
             </div>
             <div class="form-group">
-                <label class="text-info" for="publisher">Link to publication</label>
+                <label class="text-dark" for="publisher">Link to publication</label>
                 <input type="text" class="form-control {{ $errors->has('ee') ? 'is-invalid' : '' }}" id="ee" name="ee" value="{{ $publication->ee }}">
                 @if ($errors->has('ee'))
                     <span class="invalid-feedback" role="alert">
@@ -145,7 +145,7 @@
 
         </form>
         <div class="mt-5">
-            <h6 class="text-info">Presentation file :</h6>
+            <h6 class="text-dark">Presentation file :</h6>
             @if(!empty($publicationPresentation))
                 <ul class="list-unstyled">
                     @if(count($publicationPresentation)  < 5)

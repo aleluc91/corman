@@ -1,4 +1,4 @@
-<footer class="navbar-laravel">
+<footer class="bg-dark">
     <div class="container-fluid">
         <div class="row mt-2 justify-content-center">
             <div class="col-auto">

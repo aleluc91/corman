@@ -1,12 +1,19 @@
 
-<div class="card bg-white my-2">
+<div class="card my-2">
     @if(!empty($group->image_url))
         <div class="card-header p-0">
-            <img class="card-img-top" src="{{ asset('storage/' . $group->image_url) }}" alt="Group image">
+            <img class="w-100" style="height: 150px; width: auto" src="{{ asset('storage/' . $group->image_url) }}" alt="Group image">
+        </div>
+    @else
+        <div class="card-header p-0">
+            <h4 class="text-dark text-center my-2">{{ $group->name }}</h4>
         </div>
     @endif
+
     <div class="card-body">
-        <h4 class="text-info text-center my-2">{{ $group->name }}</h4>
+        @if(!empty($group->image_url))
+            <h4 class="text-dark text-center my-2">{{ $group->name }}</h4>
+        @endif
         <h6>{{ $group->description }}</h6>
         @if($groupRole === 'super_administrator')
             <button class="btn btn-danger float-right" data-toggle="modal" data-target="#deleteGroupModal">Delete<i
@@ -18,13 +25,12 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="deleteGroupModalLabel">Delete publication?</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <h4 class="text-center">Are you sure you want to delete this publication?</h4>
+                            <h4 class="text-center">Are you sure you want to delete this group?</h4>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close<i class="fas fa-times ml-2"></i>
@@ -42,6 +48,6 @@
                 </div>
             </div>
         @endif
-        <a href="{{ route('groups.show' , ['id' => $group->id]) }}" class="btn btn-info float-right mr-2">Show<i class="far fa-eye ml-2"></i></a>
+        <a href="{{ route('groups.show' , ['id' => $group->id]) }}" class="btn btn-primary float-right mr-2">Show<i class="far fa-eye ml-2"></i></a>
     </div>
 </div>

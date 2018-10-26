@@ -27,7 +27,7 @@
                         <div class="row justify-content-end">
                             <div class="col-auto">
                                 <a href="{{ route('groups.users.publications' , ['groupId' => $group->id]) }}"
-                                   class="btn btn-info">Share publication<i class="fas fa-share ml-2"></i></a>
+                                   class="btn btn-primary">Share publication<i class="fas fa-share ml-2"></i></a>
                             </div>
                         </div>
 
@@ -56,7 +56,7 @@
                                        placeholder="Search user"
                                        autocomplete="off">
                                 <input id="groupId" type="hidden" value="{{ $group->id }}">
-                                <button id="btnSearchUser" class="btn btn-info my-2 my-sm-0" type="submit">Search<i
+                                <button id="btnSearchUser" class="btn btn-primary my-2 my-sm-0" type="submit">Search<i
                                             class="fas fa-search ml-2"></i>
                                 </button>
                             </form>
@@ -66,7 +66,7 @@
                             @if($role === 'super_administrator')
                                 <div class="row justify-content-end">
                                     <div class="col-auto">
-                                        <a href="{{ route('groups.users' , ['groupId' => $group->id]) }}" class="btn btn-info">Manage users<i class="fas fa-users-cog ml-2"></i></a>
+                                        <a href="{{ route('groups.users' , ['groupId' => $group->id]) }}" class="btn btn-primary">Manage users<i class="fas fa-users-cog ml-2"></i></a>
                                     </div>
                                 </div>
                             @endif

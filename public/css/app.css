@@ -15387,6 +15387,7 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  background: #ffffff;
   padding-top: 70px;
 }
 
@@ -15414,6 +15415,10 @@ body {
   text-decoration: unset;
 }
 
+.body {
+  background: #ffffff;
+}
+
 .navbar-laravel {
   background-color: #90323d;
 }
@@ -15421,12 +15426,6 @@ body {
 .main-text {
   text-transform: uppercase;
   color: #000000;
-}
-
-.nav-item-light {
-  text-transform: uppercase;
-  font-weight: 700;
-  border-bottom: 1px solid #00adb5;
 }
 
 .badge-notify {

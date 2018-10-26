@@ -14,8 +14,7 @@
                     </div>
                 </div>
 
-                <a href="{{ route('publications.create') }}" class="btn btn-info  my-2">Create new publication<i
-                            class="fas fa-plus ml-2"></i></a>
+                <a href="{{ route('publications.create') }}" class="btn btn-light my-2"><i class="fas fa-plus mr-2"></i>Create new publication</a>
                 @if($publications->isNotEmpty())
                     @for($i=0 ; $i <= count($publications) - 1 ; $i++)
                         @include('publications.includes.publication_card' , ['publication' => $publications[$i] , 'authors' => $authors[$i] , 'topics' => $topics[$i]])
@@ -36,13 +35,15 @@
             </div>
 
             <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-                <h3>Your groups</h3>
-                <a href="{{ route('groups.create') }}" class="btn btn-info  my-2">Create new group<i
-                            class="fas fa-plus ml-2"></i></a>
+                <a href="{{ route('groups.create') }}" class="btn btn-light my-2"><i
+                            class="fas fa-plus mr-2"></i>Create new group</a>
                 @if($groups->isNotEmpty())
                     @include('groups.includes.group_card' , ['groups' => $groups])
                 @else
-                    <div class="card bg-white">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Groups</h4>
+                        </div>
                         <div class="card-body">
                             <h4>You don't belong to any group.</h4>
                         </div>

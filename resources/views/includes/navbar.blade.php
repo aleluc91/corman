@@ -1,12 +1,12 @@
-<nav class="navbar fixed-top navbar-laravel navbar-expand-md navbar-light shadow">
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark shadow">
     <div class="container-fluid">
         @guest
-            <a class="navbar-brand text-white" style="text-transform: uppercase ; font-weight: 700;"
+            <a class="navbar-brand text-white"
                href="{{ route('welcome') }}">
                 <h1>{{ config('app.name', 'Laravel') }}</h1>
             </a>
         @else
-            <a class="navbar-brand text-white" style="text-transform: uppercase ; font-weight: 700;"
+            <a class="navbar-brand text-white"
                href="{{ url('/home') }}">
                 <h1>{{ config('app.name', 'Laravel') }}</h1>
             </a>
@@ -23,11 +23,11 @@
             @auth
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link h5" href="{{ route('home') }}">Home<span
+                        <a class="nav-link" href="{{ route('home') }}">Home<span
                                     class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link h5" href="{{ route('groups.index') }}">Groups<span
+                        <a class="nav-link" href="{{ route('groups.index') }}">Groups<span
                                     class="sr-only">(current)</span></a>
                     </li>
                 </ul>
@@ -57,9 +57,9 @@
                     {{--<li class="nav-item">
                        <img class="rounded-circle" src="{{ asset('storage/' . Auth::user()->avatar) }}" style="height:50px; width:50px;">
                     </li>--}}
-                    <li class="nav-item mr-2">
+                    <li class="nav-item mr-2 my-auto">
                         <button class="btn btn-outline-light btn-sm" data-toggle="modal" data-target="#notificationModal">
-                            <div class="fa-2x">
+                            <div class="fa-1x">
                                 <span class="fa-layers fa-fw">
                                 <i class="fas fa-bell"></i>
                                     @if($registrationNotifications->isNotEmpty())
@@ -72,7 +72,7 @@
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle h5" href="#" role="button"
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{ Auth::user()->name }}  {{Auth::user()->last_name}}<span class="caret"></span>
                         </a>

@@ -6,10 +6,10 @@
 
 <div class="row">
     <div class="col-12">
-        <div class="card bg-white shadow">
+        <div class="card shadow">
 
-            <div class="card-header bg-white">
-                <h4 class="text-info">Images and videos</h4>
+            <div class="card-header">
+                <h4 class="text-dark">Images and videos</h4>
             </div>
 
             <div class="card-body">
@@ -50,9 +50,9 @@
 
 <div class="row mt-3">
     <div class="col-12">
-        <div class="card bg-white">
+        <div class="card">
 
-            <div class="card-header bg-white">
+            <div class="card-header">
                 <h4>Audio</h4>
             </div>
 

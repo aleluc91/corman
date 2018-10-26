@@ -32,7 +32,7 @@
 
                                     <div class="row">
                                         <div class="col-md-6 col-sm-12 form-group">
-                                            <label class="text-info" for="name">Name</label>
+                                            <label class="text-dark" for="name">Name</label>
                                             <input type="text"
                                                    class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
                                                    id="name" name="name"
@@ -45,7 +45,7 @@
                                             @endif
                                         </div>
                                         <div class="col-md-6 col-sm-12 form-group">
-                                            <label class="text-info" for="lastName">Last name</label>
+                                            <label class="text-dark" for="lastName">Last name</label>
                                             <input type="text"
                                                    class="form-control {{ $errors->has('lastName') ? 'is-invalid' : '' }}"
                                                    id="lastName" name="lastName"
@@ -58,7 +58,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="text-info" for="email">Email</label>
+                                        <label class="text-dark" for="email">Email</label>
                                         <input type="email"
                                                class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
                                                id="email" name="email"
@@ -70,7 +70,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group">
-                                        <label class="text-info" for="dateOfBirth">Date of birth</label>
+                                        <label class="text-dark" for="dateOfBirth">Date of birth</label>
                                         <input type="date"
                                                class="form-control {{ $errors->has('lastName') ? 'is-invalid' : '' }}"
                                                id="dateOfBirth" name="dateOfBirth"
@@ -82,7 +82,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group">
-                                        <label class="text-info" for="country">Country</label>
+                                        <label class="text-dark" for="country">Country</label>
                                         <select id="country" class="{{ $errors->has('country') ? 'is-invalid' : '' }}"
                                                 name="country" value="{{ $user->country }}">
                                             <option value="{{ $user->country }}">{{ $user->country }}</option>
@@ -94,7 +94,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group">
-                                        <label class="text-info" for="gender">Gender</label>
+                                        <label class="text-dark" for="gender">Gender</label>
                                         <select id="gender"
                                                 class="form-control {{ $errors->has('gender') ? 'is-invalid' : '' }}"
                                                 name="gender">
@@ -113,7 +113,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group">
-                                        <label class="text-info" for="affiliation">Affiliation</label>
+                                        <label class="text-dark" for="affiliation">Affiliation</label>
                                         <input type="text"
                                                class="form-control {{ $errors->has('affiliation') ? 'is-invalid' : '' }}"
                                                id="affiliation" name="affiliation"
@@ -125,7 +125,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group">
-                                        <label class="text-info"
+                                        <label class="text-dark"
                                                for="linesOfResearch">{{ __('Lines of research') }}</label>
                                         <input id="linesOfResearch" type="text"
                                                class="{{ $errors->has('linesOfResearch') ? 'is-invalid' : '' }}"

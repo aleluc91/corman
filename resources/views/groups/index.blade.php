@@ -12,7 +12,7 @@
         @endif
         <div class="row justify-content-center">
             <div class="col-12 col-sm-12 col-md-8 col-lg-8">
-                <a href="{{ route('groups.create') }}" class="btn btn-info float-right">Create new group<i class="fas fa-plus ml-2"></i></a>
+                <a href="{{ route('groups.create') }}" class="btn btn-primary float-right">Create new group<i class="fas fa-plus ml-2"></i></a>
                 <h4 class="mt-3">Your groups</h4>
                 @if($groups->isNotEmpty())
                     @for($i = 0 ; $i <= count($groups) - 1 ; $i++)

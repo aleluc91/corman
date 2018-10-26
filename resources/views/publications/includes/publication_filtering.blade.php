@@ -36,7 +36,7 @@
         @endif
     </select>
     <div class="input-group-append">
-        <button id="btnSubmit" class="btn btn-info">Filter</button>
+        <button id="btnSubmit" class="btn btn-primary">Filter</button>
     </div>
 </div>
 

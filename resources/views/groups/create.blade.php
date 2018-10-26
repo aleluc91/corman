@@ -20,7 +20,7 @@
                                 <form method="POST" action="{{ route('groups.store') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">
-                                        <label class="text-info" for="name"><b>{{ __('Name') }}</b></label>
+                                        <label class="text-dark" for="name"><b>{{ __('Name') }}</b></label>
                                         <input id="name" type="text"
                                                class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
                                                name="name"
@@ -32,7 +32,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group">
-                                        <label class="text-info"
+                                        <label class="text-dark"
                                                for="description"><b>{{ __('Description') }}</b></label>
                                         <textarea id="description" type="text"
                                                   class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}"
@@ -46,7 +46,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group">
-                                        <label class="text-info" for="description"><b>{{ __('Privacy') }}</b></label>
+                                        <label class="text-dark" for="description"><b>{{ __('Privacy') }}</b></label>
                                         <select id="privacy" type="text"
                                                 class="custom-select {{ $errors->has('privacy') ? 'is-invalid' : '' }}"
                                                 name="privacy"

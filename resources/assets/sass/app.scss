@@ -1,50 +1,46 @@
-
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Lato:300,400,600");
 
 // Variables
 @import "variables";
 
-@import 'corman/color';
+@import "corman/color";
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
 
-@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
 
-@import 'corman/card';
+@import "corman/card";
 
-@import 'corman/profile';
+@import "corman/profile";
 
-@import 'corman/layout';
+@import "corman/layout";
 
-@import 'corman/link';
+@import "corman/link";
 
-
+.body {
+  background: #ffffff;
+}
 
 .navbar-laravel {
   background-color: $color1;
 }
 
-.main-text{
+.main-text {
   text-transform: uppercase;
   color: #000000;
 }
 
-.nav-item-light{
-  text-transform: uppercase;
-  font-weight: 700;
-  border-bottom: 1px solid #00adb5;
-}
+// .nav-item-light{
+//   text-transform: uppercase;
+//   font-weight: 700;
+//   border-bottom: 1px solid #00adb5;
+// }
 
-
-.badge-notify{
-  background:red;
-  position:relative;
+.badge-notify {
+  background: red;
+  position: relative;
   top: 0px;
   left: -15px;
 }
-
-
-
-

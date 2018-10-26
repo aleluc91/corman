@@ -6,8 +6,7 @@
             <div class="col-md-8 offset-md-2 offset-lg-2">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a class="text-info" href="{{ route('groups.show' , $groupId) }}">Back to group page</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Add users to group</li>
+                        <li class="breadcrumb-item"><a class="text-primary" href="{{ route('groups.show' , $groupId) }}">Back to group page</a></li>
                     </ol>
                 </nav>
                 <h4>Users founded</h4>
@@ -24,12 +23,12 @@
                                     <div class="col-md-7">
                                         <h4 class=" my-3">{{ $users[$i]->name }} {{ $users[$i]->last_name }}</h4>
                                         <h6>
-                                            <span class="mr-1"><i class="fas fa-university text-danger"></i></span>
+                                            <span class="mr-1"><i class="fas fa-university text-primary"></i></span>
                                             <span class="font-weight-bold">Affiliation :</span>
                                             <span class="text-muted">{{ $users[$i]->affiliation }}</span>
                                         </h6>
                                         <h6>
-                                            <span class="mr-1"><i class="fas fa-book text-danger"></i></span>
+                                            <span class="mr-1"><i class="fas fa-book text-primary"></i></span>
                                             <span class="font-weight-bold">Lines of research :</span>
                                             <span class="text-muted">{{ $users[$i]->lines_of_research }}</span>
                                         </h6>
@@ -42,9 +41,9 @@
                                     <input type="hidden" name="userId" value="{{ $users[$i]->id }}">
                                     <input type="hidden" name="byUserId" value="{{ Auth::user()->id }}">
                                     @if($pendings[$i] === false)
-                                        <button class="btn btn-info" type="submit"><i class="fas fa-plus"></i></button>
+                                        <button class="btn btn-primary" type="submit"><i class="fas fa-plus mr-2"></i>Invite</button>
                                     @else
-                                        <button class="btn btn-info" type="submit" disabled>Pending request</button>
+                                        <button class="btn btn-primary" type="submit" disabled>Pending request</button>
                                     @endif
                                 </form>
                             </div>

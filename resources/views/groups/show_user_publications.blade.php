@@ -13,8 +13,7 @@
 
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a class="text-info" href="{{ route('groups.show' , $groupId) }}">Back to group page</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Add publication to group</li>
+                <li class="breadcrumb-item"><a class="text-primary" href="{{ route('groups.show' , $groupId) }}">Go back</a></li>
             </ol>
         </nav>
         <div class="row">
@@ -35,7 +34,7 @@
                             <form method="POST" action="{{ route('groups.users.store.publications') }}">
                                 @csrf
                                 <input type="hidden" name="groupId" value="{{ $groupId }}">
-                                <button type="submit" class="btn btn-info">Share all your publications<i class="fas fa-share ml-2"></i></button>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-share mr-2"></i>Share all your publications</button>
                             </form>
 
                         </div>
