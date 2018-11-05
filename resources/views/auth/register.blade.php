@@ -12,7 +12,7 @@
 
                 <div class="card shadow mt-2">
                     <div class="card-header bg-white">
-                        <h1 class="text-center">Welcome to <span class="text-info">Corman</span></h1>
+                        <h1 class="text-center">Welcome to <span class="text-primary">Corman</span></h1>
                         <h4 class="text-center">Join our community it's free!</h4>
                     </div>
 
