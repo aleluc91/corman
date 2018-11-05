@@ -6,9 +6,11 @@
             <div class="col-md-8 offset-md-2 offset-lg-2">
                 <h4>Publications founded</h4>
                 @if($publications->isNotEmpty())
+                    <ul>
                     @for($i=0 ; $i <= count($publications) - 1 ; $i++)
                             @include('publications.includes.publication_card_search' , ['publication' => $publications[$i] , 'topics' => $topics[$i]])
                     @endfor
+                    </ul>
                 @else
                     <div class="card bg-white">
                         <div class="card-body">

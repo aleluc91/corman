@@ -15,7 +15,7 @@
                     </div>
                 </div>--}}
 
-                <a href="{{ route('publications.create') }}" class="btn btn-light  my-2">Create new publication<i
+                <a href="{{ route('publications.create') }}" class="btn btn-primary  my-2">Create new publication<i
                             class="fas fa-plus ml-2"></i></a>
                 @for($i=0 ; $i <= count($publications) - 1 ; $i++)
                     @include('publications.includes.publication_card' , ['publication' => $publications[$i] , 'authors' => $authors[$i] , 'topics' => $topics[$i]])
@@ -30,7 +30,7 @@
 
             <div class="col-12 col-sm-12 col-md-3 col-lg-3">
                 <h3>Your groups</h3>
-                <a href="{{ route('groups.create') }}" class="btn btn-light  my-2">Create new group<i
+                <a href="{{ route('groups.create') }}" class="btn btn-primary  my-2">Create new group<i
                             class="fas fa-plus ml-2"></i></a>
                 @if($groups->isNotEmpty())
                     @include('groups.includes.group_card' , ['groups' => $groups])

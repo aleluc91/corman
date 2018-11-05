@@ -13,9 +13,9 @@
                             @if($authors->isNotEmpty())
                                 @for($i = 0 ; $i <= count($authors) - 1 ; $i++)
                                     <div class="col-md-8 my-2">
-                                        <h5><i class="fas fa-user text-danger mr-2"></i>{{ $authors[$i]['author'] }}</h5>
+                                        <h5><i class="fas fa-user text-primary mr-2"></i>{{ $authors[$i]['author'] }}</h5>
                                         <input type="hidden" value="{{ $authors[$i]['author'] }}">
-                                        <i class="fas fa-external-link-alt text-danger mr-2"></i><a
+                                        <i class="fas fa-external-link-alt text-primary mr-2"></i><a
                                                 href="{{ $authors[$i]['url'] }}"
                                                 target="_blank">{{ $authors[$i]['url'] }}</a>
                                         <input type="hidden" value="{{ $authors[$i]['url'] }}">
@@ -24,11 +24,11 @@
                                         <button class="btn btn-info" data-toggle="modal" data-target="#modal{{$i}}">
                                             <i class="fas fa-info-circle"></i>
                                         </button>
-                                        <form action="{{ route('dblp.store') }}" method="POST">
+                                        <form class="d-inline" action="{{ route('dblp.store') }}" method="POST">
                                             @csrf
                                             <input type="hidden" name="author" value="{{ $authors[$i]['author'] }}">
                                             <input type="hidden" name="url" value="{{ $authors[$i]['url'] }}">
-                                            <button type="submit" class="btn btn-info"><i class="fas fa-check mr-2"></i>Select</button>
+                                            <button type="submit" class="btn btn-primary"><i class="fas fa-check mr-2"></i>Select</button>
                                         </form>
 
                                     </div>

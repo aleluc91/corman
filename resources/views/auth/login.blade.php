@@ -7,7 +7,7 @@
 
                 <div class="card shadow mt-3">
                     <div class="card-header bg-white">
-                        <h1 class="text-center">Welcome back to <span class="text-info">Corman</span>.</h1>
+                        <h1 class="text-center">Welcome back to <span class="text-primary">Corman</span>.</h1>
                         <h4 class="text-center">Please log in. </h4>
                     </div>
 

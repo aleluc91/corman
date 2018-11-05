@@ -1,81 +1,51 @@
-<div class="card bg-white my-2 shadow">
-    <div class="card-body">
-
-        <div class="row">
-            <div class="col-md-5 col-lg-5">
-
-                <div class="profile-card">
-                    <img class="avatar" src="{{ asset('storage/' . $user->avatar) }}">
+<li class="list-group-item">
+    <div class="media">
+        <img class="align-self-start mr-3" style="width:64px; height:64px;" src="{{ asset('storage/' . $user->avatar) }}" alt="avatar">
+        <div class="media-body">
+            <div class="row">
+                <div class="col-auto">
+                    <h4 class="my-auto">{{ $user->name }} {{ $user->last_name }}</h4>
                 </div>
             </div>
-            <div class="col-md-7">
-                <h4 class=" my-3">{{ $user->name }} {{ $user->last_name }}</h4>
-                <h6>
-                    <span class="mr-1"><i class="fas fa-university text-danger"></i></span>
-                    <span class="font-weight-bold">Affiliation :</span>
-                    <span class="text-muted">{{ $user->affiliation }}</span>
-                </h6>
-                <h6>
-                    <span class="mr-1"><i class="fas fa-book text-danger"></i></span>
-                    <span class="font-weight-bold">Lines of research :</span>
-                    <span class="text-muted">{{ $user->lines_of_research }}</span>
-                </h6>
-                @if($user->id === Auth::user()->id)
-                    <form method="POST">
-                        @csrf
-                        @method('PATCH')
-                        <div class="form-group">
-                            <label for="role">User role</label>
-                            <select class="custom-select" name="role" id="role" value="{{ $userRole }}" disabled>
-                                <option value="super_administrator">Super administrator</option>
-                            </select>
-                        </div>
-                    </form>
-                    <form method="POST" action="">
-                        @csrf
-                        @method('DELETE')
-                        <div class="row justify-content-end">
+            <div class="row">
+                <div class="col-8">
+                    <div class="row justify-content-end">
+                        @if($user->id !== Auth::user()->id)
                             <div class="col-auto">
-                                <button class="btn btn-danger" disabled>Delete user</button>
+                                <form class="d-inline" method="POST" action="{{ route('groups.users.update.role') }}">
+                                    @csrf
+                                    @method('PATCH')
+                                    <input type="hidden" name="userId" value="{{ $user->id }}">
+                                    <input type="hidden" name="groupId" value="{{ $groupId }}">
+                                    <label for="role">User role</label>
+                                    <div class="form-group form-inline">
+                                        <select class="custom-select" name="role" id="role" value="{{ $userRole }}">
+                                            <option value="administrator" selected>Administrator</option>
+                                            <option value="user">User</option>
+                                        </select>
+                                        <button type="submit" class="btn btn-primary ml-2">Update role <i class="fas fa-edit ml-2"></i></button>
+                                    </div>
+                                </form>
                             </div>
-                        </div>
-                    </form>
+                            <div class="col-auto">
+                                <form class="d-inline" method="POST" action="{{ route('groups.users.destroy' , ['userId' => $user->id]) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="hidden" name="userId" value="{{ $user->id }}">
+                                    <input type="hidden" name="groupId" value="{{ $groupId }}">
 
-                @else
-                    <form method="POST" action="{{ route('groups.users.update.role') }}">
-                        @csrf
-                        @method('PATCH')
-                        <input type="hidden" name="userId" value="{{ $user->id }}">
-                        <input type="hidden" name="groupId" value="{{ $groupId }}">
-                        <div class="form-group">
-                            <label for="role">User role</label>
-                            <select class="custom-select" name="role" id="role" value="{{ $userRole }}">
-                                <option value="administrator" selected>Administrator</option>
-                                <option value="user">User</option>
-                            </select>
-                            <div class="row justify-content-end mt-2">
-                                <div class="col-auto">
-                                    <button class="btn btn-info">Update role<i class="fas fa-edit ml-2"></i></button>
-                                </div>
+                                            <button class="btn btn-danger">Delete user <i class="fas fa-trash-alt ml-2"></i>
+                                            </button>
+                                </form>
                             </div>
-                        </div>
-                    </form>
-                    <form method="POST" action="{{ route('groups.users.destroy' , ['userId' => $user->id]) }}">
-                        @csrf
-                        @method('DELETE')
-                        <input type="hidden" name="userId" value="{{ $user->id }}">
-                        <input type="hidden" name="groupId" value="{{ $groupId }}">
-                        <div class="row justify-content-end">
-                            <div class="col-auto">
-                                <button class="btn btn-danger">Delete user <i class="fas fa-trash-alt ml-2"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                        @endif
+                    </div>
+                </div>
             </div>
         </div>
-        @endif
     </div>
 
+</li>
 
-</div>
+
+

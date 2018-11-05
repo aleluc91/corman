@@ -49,7 +49,8 @@ class UserProfileController extends Controller
                 Rule::unique('users')->ignore(Auth::user()->id),
             ],
             'affiliation' => 'required|string|max:255',
-            'linesOfResearch' => 'required|string|max:255'
+            'linesOfResearch' => 'required|string|max:255',
+            'privacy' => 'required|string'
         ]);
         $user = User::find(Auth::user()->id);
         $user->name = $request->get('name');
@@ -60,7 +61,7 @@ class UserProfileController extends Controller
         $user->gender = $request->get('gender');
         $user->affiliation = $request->get('affiliation');
         $user->lines_of_research = $request->get('linesOfResearch');
-
+        $user->privacy = $request->get('privacy');
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             if($user->avatar !== 'users_image/default_avatar.png'){

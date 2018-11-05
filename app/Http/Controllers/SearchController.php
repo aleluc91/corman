@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Author;
+use App\Group;
 use App\Publication;
 use App\Topic;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class SearchController extends Controller
 {
@@ -25,13 +28,20 @@ class SearchController extends Controller
         $publications = Publication::with('authors', 'topics')
             ->whereHas('topics', function ($query) use ($value) {
                 $query->where('name', 'like', '%' . $value . '%');
-            })->paginate(10);
+            })->orderBy('year' , 'desc')
+            ->paginate(10);
 
         $users = User::with('author.publications.topics')
             ->whereHas('author.publications.topics', function ($query) use ($value) {
                 $query->where('topics.name', 'like', '%' . $value . '%');
-            })->get();
+            })->orderBy('name' , 'desc')
+            ->get();
 
+        $groups = Group::where([
+            ['name', 'like' , '%' . $value . '%'],
+            ['privacy', '=' , 'public']
+            ])->orderBy('name', 'desc')
+            ->get();
 
         $authors = collect([]);
         $topics = collect([]);
@@ -52,13 +62,15 @@ class SearchController extends Controller
             });
         }
 
+
         //$publications = $publications->paginate(10);
         return view('search.index', compact(
             'publications',
             'users',
             'authors',
             'topics',
-            'value'
+            'value',
+            'groups'
         ));
     }
 
@@ -74,9 +86,14 @@ class SearchController extends Controller
     }
 
     public function searchUsers($userId , $value){
-        $users = User::where('id' , '!=' , $userId)
-            ->where('name' , 'like' , '%' . $value . '%')
-            ->orWhere('last_name' , 'like' , '%' . $value . '%')
+        $users = User::where([
+                ['name' , 'like' , '%' . $value . '%'],
+                ['id' , '!=' , Auth::user()->id]
+            ])
+            ->orWhere([
+                ['last_name' , 'like' , '%' . $value . '%'],
+                ['id' , '!=' , Auth::user()->id]
+            ])
             ->get();
         return response()->json(['users' => $users]);
     }
@@ -157,6 +174,17 @@ class SearchController extends Controller
             ->orWhere('last_name', 'like', '%' . $query . '%')
             ->get();
         return response()->json($user);
+    }
+
+    public function indexGroups($value)
+    {
+        $groups = Group::where([
+            ['name', 'like' , '%' . $value . '%'],
+            ['privacy', '=' , 'public']
+        ])->orderBy('name', 'desc')
+            ->paginate(10);
+
+        return view('search.index_groups', compact('groups'));
     }
 
 }

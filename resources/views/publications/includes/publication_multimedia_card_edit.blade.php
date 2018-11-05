@@ -6,11 +6,9 @@
 @endpush
 
 <div class="row">
-    <div class="card shadow w-100">
-        <div class="card-header">
-            <h4 class="text-center">Publication Multimedia</h4>
-        </div>
+    <div class="card w-100">
         <div class="card-body">
+            <label>Publication multimedia</label>
             @if(!empty($publicationMultimedias))
                 @foreach($publicationMultimedias as $multimedia)
                     <form action="{{ route('multimedias.destroy' , ['id' => $multimedia->id]) }}" method="POST">
@@ -101,12 +99,9 @@
 
 
 <div class="row mt-3">
-    <div class="card bg-white w-100">
-        <div class="card-header bg-white">
-            <h4 class="text-center">Upload new files</h4>
-        </div>
+    <div class="card w-100">
         <div class="card-body">
-
+            <label>Upload new file</label>
             <div class="file-loading">
                 @csrf
                 <input id="publicationId" type="hidden" value="{{ $publication->id }}">

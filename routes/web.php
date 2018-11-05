@@ -62,6 +62,7 @@ Route::get('/search/autocomplete/publications/{query}' , 'SearchController@autoC
 Route::get('/search/{value}' , 'SearchController@index')->name('search.index');
 Route::get('/search/users/{value}' , 'SearchController@indexUsers')->name('search.index.users');
 Route::get('/search/publications/{value}' , 'SearchController@indexPublications')->name('search.index.publications');
+Route::get('/search/index/{value}' , 'SearchController@indexGroups')->name('search.index.groups');
 Route::get('/search/groups/users/{value}/{group}' , 'SearchController@searchGroupsUsers')->name('search.groups.users');
 Route::get('/search/users/{user}/{value}' , 'SearchController@searchUsers')->name('search.publications.users');
 
@@ -70,6 +71,8 @@ Route::get('/groups' , 'GroupController@index')->name('groups.index');
 Route::get('/groups/create' , 'GroupController@create')->name('groups.create');
 Route::post('/groups' , 'GroupController@store')->name('groups.store');
 Route::delete('/groups/{group}' , 'GroupController@destroy')->name('groups.destroy');
+Route::get('/groups/{group}/edit' , 'GroupController@edit')->name('groups.edit');
+Route::patch('/groups' , 'GroupController@update')->name('groups.update');
 Route::get('/groups/{group}' , 'GroupController@show')->name('groups.show');
 Route::post('/groups/users' , 'GroupController@acceptUser')->name('groups.users.store');
 Route::get('/groups/{group}/user/publications' , 'GroupController@getUserPublications')->name('groups.users.publications');
@@ -80,9 +83,12 @@ Route::get('/groups/{group}/users' , 'GroupController@showAllUsers')->name('grou
 Route::patch('/groups/users/role' , 'GroupController@updateUserRole')->name('groups.users.update.role');
 Route::delete('/groups/users/{user}/delete' , 'GroupController@deleteUser')->name('groups.users.destroy');
 
+
 //Groups Registration Notification
-Route::post('/groups/registration/notification' , 'GroupRegistrationNotificationController@store')->name('groups.registration.notification.store');
+Route::post('/groups/users/invitation' , 'GroupController@invitation')->name('groups.users.invitation');
 Route::delete('/groups/registration/notification/{notification}' , 'GroupRegistrationNotificationController@destroy')->name('groups.registration.notification.destroy');
-
-
+Route::post('/groups/user/partecipate' , 'GroupController@partecipate')->name('groups.users.partecipate');
+Route::post('/groups/user/partecipate/accept', 'GroupController@acceptPartecipation')->name('groups.users.partecipate.accept');
+Route::post('/groups/user/partecipate/refuse', 'GroupController@refusePartecipation')->name('groups.users.partecipate.refuse');
+Route::post('/groups/user/invitation/refuse', 'GroupController@refuseInvitation')->name('groups.users.invitation.refuse');
 

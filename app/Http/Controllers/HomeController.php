@@ -29,10 +29,10 @@ class HomeController extends Controller
         //Coreggere ritrovare i gruppi partendo dall'utente e non dalle pubblicazioni
 
         $publications = \App\Publication::with(['authors', 'topics', 'groups'])
-            ->latest()
             ->whereHas('authors', function ($query) {
                 $query->where('dblp_url', '=', Auth::user()->dblp_url);
-            });
+            })
+            ->orderBy('year' , 'desc');
 
         $authors = collect([]);
         $topics = collect([]);

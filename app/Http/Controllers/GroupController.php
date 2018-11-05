@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Group;
 use App\GroupRegistrationNotification;
+use App\Notifications\GroupInvitation;
+use App\Notifications\GroupPartecipation;
 use App\Publication;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -57,11 +60,37 @@ class GroupController extends Controller
             );
             $group->image_url = $path;
         }
-        var_dump($request->hasFile('image'));
         $group->privacy = $request->get('privacy');
         $group->save();
         $group->users()->attach(Auth::user()->id, ['role' => 'super_administrator']);
-        return redirect()->route('groups.index')->with('status', 'The group has been created!');
+        return redirect()->route('groups.index')->with('status', 'The group data has been updated!');
+    }
+
+    public function edit($id){
+        $group = Group::find($id);
+        return view('groups.edit' , ['group' => $group]);
+    }
+
+
+    public function update(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|min:2|max:80',
+            'description' => 'required|min:2|max:1000'
+        ]);
+        $group = Group::find($request->get('id'));
+        $group->name = $request->get('name');
+        $group->description = $request->get('description');
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $path = $file->store(
+                'groups_image', 'public'
+            );
+            $group->image_url = $path;
+        }
+        $group->privacy = $request->get('privacy');
+        $group->save();
+        return redirect()->route('groups.index')->with('status', 'Group data updated!');
     }
 
     public function show($id)
@@ -166,9 +195,6 @@ class GroupController extends Controller
 
         $authors = collect([]);
         $topics = collect([]);
-        /*$singleType = collect([]);
-        $singleTopic = collect([]);
-        $singleYear = collect([]);*/
 
         if (!empty($publications)) {
             $publications->each(function ($item, $key) use ($authors, $topics) {
@@ -185,21 +211,8 @@ class GroupController extends Controller
                     });
                     $authors->push(['authors' => $localAuthors, 'active' => $localAuthorsActive]);
                 }
-
-
                 $topics->push($item->topics);
-
-                /*if (!$singleType->contains($item->type))
-                    $singleType->push($item->type);
-                $item->topics->map(function ($item, $key) use ($singleTopic) {
-                    if (!$singleTopic->contains($item))
-                        $singleTopic->push($item);
-                });
-                if (!$singleYear->contains($item->year))
-                    $singleYear->push($item->year);*/
             });
-
-
         }
 
 
@@ -276,6 +289,56 @@ class GroupController extends Controller
         $group->users()->detach($request->get('userId'));
         return redirect()->back()->with('status' , 'The user has been deleted from the group!');
     }
+
+    public function partecipate(Request $request){
+        $group = Group::with('users')->find($request->get('groupId'));
+
+        $group->users->map(function($item,$key) use($request){
+           if($item->pivot->role === "super_administrator" or $item->pivot->role === "administrator")
+               $item->notify(new GroupPartecipation($request->get('userId') , $request->get('groupId')));
+        });
+        return redirect()->back()->with('status', "Partecipation request has been sent to group staff!");
+    }
+
+    public function acceptPartecipation(Request $request){
+        $group = Group::find($request->get('groupId'));
+        $group->users()->attach($request->get('userId'), ['role' => 'user']);
+        foreach(Auth::user()->notifications as $notification){
+            if($notification->id === $request->get('notificationId'))
+                $notification->delete();
+        }
+        return redirect()->back()->with('status', "User was added to the group!");
+    }
+
+    public function invitation(Request $request){
+        $user = User::find($request->get('userId'));
+        $user->notify(new GroupInvitation(Auth::user()->id , $request->get('groupId')));
+        return redirect()->back()->with('status', "Request has been sent to the user!");
+    }
+
+    public function refuseInvitation(Request $request){
+        //Eliminare dall'utente attuale
+        $user = User::find($request->get('userId'));
+        foreach($user->notifications as $notification){
+            if($notification->id === $request->get('notificationId'))
+                $notification->delete();
+        }
+        return redirect()->back()->with('status', "The invitation request has been rejected!");
+    }
+
+    public function refusePartecipation(Request $request){
+        $group = Group::find($request->get('groupId'));
+        $group->users->map(function ($item, $key) use($request){
+            if($item->pivot->role === "super_administrator" or $item->pivot->role === "administrator"){
+                foreach($item->notifications as $notification){
+                    if($notification->id === $request->get('notificationId'))
+                        $notification->delete();
+                }
+            }
+        });
+        return redirect()->back()->with('status', "The partecipation request has been rejected!");
+    }
+
 
 
 }

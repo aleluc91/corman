@@ -14,7 +14,7 @@
                     </div>
                 </div>
 
-                <a href="{{ route('publications.create') }}" class="btn btn-light my-2"><i class="fas fa-plus mr-2"></i>Create new publication</a>
+                <a href="{{ route('publications.create') }}" class="btn btn-primary my-2"><i class="fas fa-plus mr-2"></i>Create new publication</a>
                 @if($publications->isNotEmpty())
                     @for($i=0 ; $i <= count($publications) - 1 ; $i++)
                         @include('publications.includes.publication_card' , ['publication' => $publications[$i] , 'authors' => $authors[$i] , 'topics' => $topics[$i]])
@@ -28,6 +28,9 @@
                     <div class="card bg-white">
                         <div class="card-body">
                             <h4 class="text-center">No publications were found.</h4>
+                            <h5 class="text-danger text-center">If you have just registered , and if you have selected one dblp profile,
+                                please wait few minutes and refresh the page to see your publications.</h5>
+
                         </div>
                     </div>
                 @endif
@@ -35,7 +38,7 @@
             </div>
 
             <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-                <a href="{{ route('groups.create') }}" class="btn btn-light my-2"><i
+                <a href="{{ route('groups.create') }}" class="btn btn-primary my-2"><i
                             class="fas fa-plus mr-2"></i>Create new group</a>
                 @if($groups->isNotEmpty())
                     @include('groups.includes.group_card' , ['groups' => $groups])

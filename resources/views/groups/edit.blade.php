@@ -11,20 +11,21 @@
             <div class="col-12 col-sm-12 col-md-8 col-lg-8">
                 <div class="card bg-white">
                     <div class="card-header bg-white">
-                        <h1 class="text-center">Create new group</h1>
-                        <h3 class="text-center">And start collaborating with other users</h3>
+                        <h1 class="text-center">Edit group data</h1>
                     </div>
                     <div class="card-body">
                         <div class="row justify-content-center">
                             <div class="col-12 col-sm-12 col-md-8 col-lg-8">
-                                <form method="POST" action="{{ route('groups.store') }}" enctype="multipart/form-data">
+                                <form method="POST" action="{{ route('groups.update') }}" enctype="multipart/form-data">
                                     @csrf
+                                    @method('patch')
+                                    <input type="hidden" value="{{ $group->id }}" name="id">
                                     <div class="form-group">
                                         <label class="text-dark" for="name"><b>{{ __('Name') }}</b></label>
                                         <input id="name" type="text"
                                                class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
                                                name="name"
-                                               placeholder="">
+                                               placeholder="" value="{{$group->name}}">
                                         @if ($errors->has('password'))
                                             <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('name') }}</strong>
@@ -37,7 +38,7 @@
                                         <textarea id="description" type="text"
                                                   class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}"
                                                   name="description"
-                                                  placeholder="">
+                                                  placeholder="" >{{$group->description}}
                                         </textarea>
                                         @if ($errors->has('description'))
                                             <span class="invalid-feedback" role="alert">
@@ -50,7 +51,8 @@
                                         <select id="privacy" type="text"
                                                 class="custom-select {{ $errors->has('privacy') ? 'is-invalid' : '' }}"
                                                 name="privacy"
-                                                placeholder="">
+                                                placeholder=""
+                                                value="{{$group->privacy}}">
                                             <option value="public" selected>Public</option>
                                             <option value="private">Private</option>
                                         </select>
@@ -67,7 +69,11 @@
                                                data-msg-placeholder="Select image for upload..."
                                                data-show-upload="false">
                                     </div>
-                                    <button type="submit" class="btn btn-primary float-right">Create</button>
+                                    <div class="row justify-content-end mt-2">
+                                        <div class="col-auto">
+                                            <button type="submit" class="btn btn-primary">Update<i class="fas fa-plus ml-2"></i></button>
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
                         </div>

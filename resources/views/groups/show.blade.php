@@ -19,6 +19,7 @@
             <h5 class="text-center text-white">{{ $group->description }}</h5>
         </div>
     </div>
+    @if($group->privacy === 'public' or Auth::user()->groups->find($group->id))
     <div class="container mt-2">
         <div class="row justify-content-center">
             <div class="col 12 col-sm-12 col-md-12 col-lg-12">
@@ -26,8 +27,10 @@
                     <div class="col-12 col-sm-12 col-md-8 col-lg-8">
                         <div class="row justify-content-end">
                             <div class="col-auto">
-                                <a href="{{ route('groups.users.publications' , ['groupId' => $group->id]) }}"
-                                   class="btn btn-primary">Share publication<i class="fas fa-share ml-2"></i></a>
+                                @if(Auth::user()->groups->find($group->id))
+                                    <a href="{{ route('groups.users.publications' , ['groupId' => $group->id]) }}"
+                                        class="btn btn-primary">Share publication<i class="fas fa-share ml-2"></i></a>
+                                @endif
                             </div>
                         </div>
 
@@ -85,6 +88,19 @@
             </div>
         </div>
     </div>
+    @else
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="text-danger text-center">This group is private</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    @endif
 @endsection
 
 @push('body.scripts')

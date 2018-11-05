@@ -23,32 +23,32 @@
             <p class="small text-center">You can not see more information.</p>
         @else
             <p>
-                <span class="mr-1"><i class="fas fa-envelope text-primary"></i></span>
+                <span class="mr-1"><i class="fas fa-envelope text-dark"></i></span>
                 <span class="font-weight-bold">Email :</span>
                 <span class="text-muted"> {{ $user->email }} </span>
             </p>
             <p>
-                <span class="mr-1"><i class="fas fa-calendar text-primary"></i></span>
+                <span class="mr-1"><i class="fas fa-calendar text-dark"></i></span>
                 <span class="font-weight-bold">Date of birth :</span>
                 <span class="text-muted">{{ date('d/m/Y', strtotime($user->date_of_birth)) }}</span>
             </p>
             <p>
-                <span class="mr-1"><i class="fas fa-map-marker-alt text-primary"></i></span>
+                <span class="mr-1"><i class="fas fa-map-marker-alt text-dark"></i></span>
                 <span class="font-weight-bold">Country :</span>
                 <span class="text-muted">{{ $user->country }}</span>
             </p>
             <p>
-                <span class="mr-1"><i class="fas fa-venus-mars text-primary"></i></span>
+                <span class="mr-1"><i class="fas fa-venus-mars text-dark"></i></span>
                 <span class="font-weight-bold">Gender :</span>
                 <span class="text-muted">{{ $user->gender }}</span>
             </p>
             <p>
-                <span class="mr-1"><i class="fas fa-university text-primary"></i></span>
+                <span class="mr-1"><i class="fas fa-university text-dark"></i></span>
                 <span class="font-weight-bold">Affiliation :</span>
                 <span class="text-muted">{{ $user->affiliation }}</span>
             </p>
             <p>
-                <span class="mr-1"><i class="fas fa-book text-primary"></i></span>
+                <span class="mr-1"><i class="fas fa-book text-dark"></i></span>
                 <span class="font-weight-bold">Lines of research :</span>
                 <span class="text-muted">{{ $user->lines_of_research }}</span>
             </p>

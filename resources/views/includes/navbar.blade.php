@@ -58,13 +58,14 @@
                        <img class="rounded-circle" src="{{ asset('storage/' . Auth::user()->avatar) }}" style="height:50px; width:50px;">
                     </li>--}}
                     <li class="nav-item mr-2 my-auto">
-                        <button class="btn btn-outline-light btn-sm" data-toggle="modal" data-target="#notificationModal">
+                        <button class="btn btn-outline-light btn-sm" data-toggle="modal"
+                                data-target="#notificationModal">
                             <div class="fa-1x">
                                 <span class="fa-layers fa-fw">
                                 <i class="fas fa-bell"></i>
-                                    @if($registrationNotifications->isNotEmpty())
+                                    @if(Auth::user()->notifications->count() > 0)
                                         <span class="fa-layers-counter"
-                                              style="background:Tomato">{{ $registrationNotifications->count() }}</span>
+                                              style="background:Tomato">{{ Auth::user()->notifications->count() }}</span>
                                     @endif
                             </span>
                             </div>
@@ -97,7 +98,8 @@
     </div>
 </nav>
 
-<div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
+<div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -107,21 +109,88 @@
                 </button>
             </div>
             <div class="modal-body">
-                @if($registrationNotifications->isNotEmpty())
-                    @for($i = 0 ; $i <= count($registrationNotifications) - 1; $i++)
-                        @include('notifications.includes.registration_notifications_card' , [
-                            'registrationNotification' => $registrationNotifications[$i],
-                            'groupPending' => $groupsPending[$i],
-                            'userBy' => $usersBy[$i]
-                        ])
-                    @endfor
-                @else
-                    <div class="card-bg-white">
-                        <div class="card-body">
-                            <h3>You have no notifications</h3>
-                        </div>
-                    </div>
-                @endif
+                @auth
+                    <ul class="list-group">
+                        @foreach(Auth::user()->notifications as $notification)
+                            <li class="list-group-item">
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        @if($notification->type === "App\Notifications\GroupPartecipation")
+                                            The user
+                                            <a class="text-primary" target="_blank"
+                                               href="{{ route('users.show' , \App\User::find($notification->data['userId'])->id) }}">
+                                                {{ \App\User::find($notification->data['userId'])->name }} {{ \App\User::find($notification->data['userId'])->last_name }}
+                                            </a>
+                                            want to join the group
+                                            <a class="text-primary" target="_blank"
+                                               href="{{ route('groups.show' , $notification->data['groupId']) }}">
+                                                {{ \App\Group::find($notification->data['groupId'])->name  }}
+                                            </a>
+                                            <div class="row ">
+                                                <div class="col-12">
+                                                    <form class="d-inline" method="POST"
+                                                          action="{{ route('groups.users.partecipate.accept') }}">
+                                                        @csrf
+                                                        <input type="hidden" name="groupId"
+                                                               value="{{ $notification->data['groupId'] }}">
+                                                        <input type="hidden" name="userId"
+                                                               value="{{ $notification->data['userId'] }}">
+                                                        <input type="hidden" name="notificationId"
+                                                               value="{{ $notification->id }}">
+                                                        <button type="submit" class="btn btn-sm btn-primary">Accept
+                                                        </button>
+                                                    </form>
+                                                    <form class="d-inline" action="{{ route('groups.users.partecipate.refuse') }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="groupId" value="{{ $notification->data['groupId'] }}">
+                                                        <input type="hidden" name="notificationId" value="{{ $notification->id }}">
+                                                        <button class="btn btn-sm btn-danger">Reject</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        @elseif($notification->type === "App\Notifications\GroupInvitation")
+                                            The user
+                                            <a class="text-primary" target="_blank"
+                                               href="{{ route('users.show' , \App\User::find($notification->data['userId'])->id) }}">
+                                                {{ \App\User::find($notification->data['userId'])->name }} {{ \App\User::find($notification->data['userId'])->last_name }}
+                                            </a>
+                                            sent you a group invitation to
+                                            <a class="text-primary" target="_blank"
+                                               href="{{ route('groups.show' , $notification->data['groupId']) }}">
+                                                {{ \App\Group::find($notification->data['groupId'])->name  }}
+                                            </a>
+                                            <div class="row ">
+                                                <div class="col-12">
+                                                    <form class="d-inline" method="POST"
+                                                          action="{{ route('groups.users.partecipate.accept') }}">
+                                                        @csrf
+                                                        <input type="hidden" name="groupId"
+                                                               value="{{ $notification->data['groupId'] }}">
+                                                        <input type="hidden" name="userId"
+                                                               value="{{ Auth::user()->id }}">
+                                                        <input type="hidden" name="notificationId"
+                                                               value="{{ $notification->id }}">
+                                                        <button type="submit" class="btn btn-sm btn-primary">Accept
+                                                        </button>
+                                                    </form>
+                                                    <form class="d-inline" action="{{ route('groups.users.invitation.refuse') }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
+                                                        <input type="hidden" name="notificationId" value="{{ $notification->id }}">
+                                                        <button class="btn btn-sm btn-danger">Reject</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+
+
+                            </li>
+                        @endforeach
+                    </ul>
+                @endauth
             </div>
         </div>
     </div>

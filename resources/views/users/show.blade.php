@@ -9,7 +9,7 @@
                         <div class="profile-card mb-3">
                                 <img class="avatar1" src="{{ asset('storage/' . $user->avatar) }}">
                             </div>
-                            <h1 class="text-center text-primary mb-3">{{ $user->name }} {{ $user->last_name }}</h1>
+                            <h1 class="text-center text-dark mb-3">{{ $user->name }} {{ $user->last_name }}</h1>
                 </div>
                 <div class="card-body">
                     
@@ -17,6 +17,7 @@
                         <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                             <div class="card bg-white">
                                 <div class="card-body">
+                                    @if($user->privacy === 'public' or Auth::user()->id === $user->id)
                                     <h6>
                                         <span class="mr-1"><i class="fas fa-envelope text-dark"></i></span>
                                         <span class="font-weight-bold">Email :</span>
@@ -47,6 +48,9 @@
                                         <span class="font-weight-bold">Lines of research :</span>
                                         <span class="text-muted">{{ $user->lines_of_research }}</span>
                                     </h6>
+                                    @else
+                                        <h5 class="text-center text-danger">This profile is private</h5>
+                                    @endif
                                 </div>
                             </div>
 
@@ -55,7 +59,9 @@
                             <div class="card bg-primary mb-2">
                                 <div class="card-body">
                                     <h4 class="text-center text-white">Total publications</h4>
-                                    <h4 class="text-center text-white">{{ $user->author->publications->count() }}</h4>
+                                    <h4 class="text-center text-white">
+                                        {{ $user->author->publications->count() }}
+                                    </h4>
                                 </div>
                             </div>
                             <div class="card bg-primary my-2">
@@ -68,9 +74,19 @@
                     </div>
                 </div>
             </div>
-            @if(Auth::user()->id === $user->id)
-                <a href="{{ route('users.edit' , ['id' => Auth::user()->id]) }}" class="btn btn-primary float-right mt-2">Edit profile</a>
-            @endif
+            <div class="row justify-content-end mt-2">
+                <div class="col-auto">
+                    @if(Auth::user()->id === $user->id)
+                        <a href="{{ route('users.edit' , ['id' => Auth::user()->id]) }}" class="btn btn-primary">Edit profile</a>
+                    @endif
+                    <a class="btn btn-info"
+                       href="{{ route('authors.show' , $user->author->id) }}">
+                        <i class="far fa-eye mr-2"></i>
+                        View Publication
+                    </a>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

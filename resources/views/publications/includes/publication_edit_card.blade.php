@@ -3,10 +3,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('vendor/selectize.js/css/selectize.default.css')}}"/>
 @endpush
 
-<div class="card shadow">
-    <div class="card-header">
-        <h4 class="text-center">Publication info</h4>
-    </div>
+<div class="card">
     <div class="card-body">
         <form action="{{ route('publications.update' , ['id' => $publication->id]) }}" method="POST">
             @csrf

@@ -136,8 +136,27 @@
                                             </span>
                                         @endif
                                     </div>
-                                    <button type="submit" class="btn btn-primary float-right">Update<i
-                                                class="far fa-edit ml-2"></i></button>
+                                    <div class="form-group">
+                                        <label class="text-dark" for="gender">Privacy</label>
+                                        <select id="gender"
+                                                class="form-control {{ $errors->has('privacy') ? 'is-invalid' : '' }}"
+                                                name="privacy">
+                                            <option value="public">Public</option>
+                                            <option value="private">Private</option>
+                                        </select>
+                                        @if ($errors->has('private'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('private') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                    <row class="justify-content-end mt-2">
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-primary float-right">Update<i
+                                                        class="far fa-edit ml-2"></i></button>
+                                        </div>
+                                    </row>
+
 
                                 </div>
                             </div>

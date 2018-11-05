@@ -26,7 +26,6 @@
                 <input type="hidden" name="authorId" value="{{ Auth::user()->author->id }}">
                 <div class="col-12 col-sm 12 col-md-7 col-lg-7">
                     @include('publications.includes.publication_create_card')
-                    <button type="submit" class="btn btn-primary float-right"></i>Create<i class="fas fa-plus ml-2"></i></button>
                 </div>
 
                 <div class="col-12 col-sm-12 col-md-5 col-lg-5">
@@ -35,6 +34,12 @@
                 </div>
 
 
+            </div>
+            <div class="row justify-content-end mt-2">
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary"></i>Create Publication<i class="fas fa-plus ml-2"></i>
+                    </button>
+                </div>
             </div>
         </form>
 
@@ -115,23 +120,34 @@
                             '</div>';
                     },
                     option: function (item, escape) {
-                        return '<div class="row justify-content-end my-1">' +
-                            '<div class="col-4">' +
-                            '<div class="p-2">' +
-                            '<img style="height:50px" class="w-50 rounded-circle img-fluid" src="/storage/' + item.avatar + '">' +
-                            '</div>' +
-                            '</div>' +
-                            '<div class="col-7">' +
-                            '<div class="p-2">' +
-                            '<h5>' + escape(item.name) + ' ' + escape(item.last_name) + '</h5>' +
-                            '<h6>' +
-                            '<span class="mr-1"><i class="fas fa-university text-danger"></i></span>' +
-                            '<span class="font-weight-bold">Affiliation : </span>' +
-                            '<span class="text-muted">' + item.affiliation + '</span>' +
-                            '</h6>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>';
+                        return `<div class="row p-2">
+                                    <div class="col-auto">
+                                        <img style="height:32px; height:32px" alt="avatar" src="/storage/${item.avatar}">
+                                    </div>
+                                    <div class="col-auto my-auto">
+                                        <a class="text-primary h6" href="">
+                                            ${escape(item.name)} ${escape(item.last_name)}
+                                        </a>
+                                    </div>
+                                </div>`;
+
+                        // return '<div class="row justify-content-end my-1">' +
+                        //     '<div class="col-4">' +
+                        //     '<div class="p-2">' +
+                        //     '<img style="height:50px" class="w-50 rounded-circle img-fluid" src="/storage/' + item.avatar + '">' +
+                        //     '</div>' +
+                        //     '</div>' +
+                        //     '<div class="col-7">' +
+                        //     '<div class="p-2">' +
+                        //     '<h5>' + escape(item.name) + ' ' + escape(item.last_name) + '</h5>' +
+                        //     '<h6>' +
+                        //     '<span class="mr-1"><i class="fas fa-university text-danger"></i></span>' +
+                        //     '<span class="font-weight-bold">Affiliation : </span>' +
+                        //     '<span class="text-muted">' + item.affiliation + '</span>' +
+                        //     '</h6>' +
+                        //     '</div>' +
+                        //     '</div>' +
+                        //     '</div>';
                     }
                 },
                 load: function (query, callback) {
@@ -205,90 +221,88 @@
                 }
             });
 
-            $('#type').ready(function(){
-                switch($('#type').val()){
+            $('#type').ready(function () {
+                switch ($('#type').val()) {
                     case 'Journal Articles' :
-                        $('#volume').prop('disabled' , false);
-                        $('#number').prop('disabled' , false);
-                        $('#pages').prop('disabled' , false);
-                        $('#publisher').prop('disabled' , true);
+                        $('#volume').prop('disabled', false);
+                        $('#number').prop('disabled', false);
+                        $('#pages').prop('disabled', false);
+                        $('#publisher').prop('disabled', true);
                         break;
                     case 'Conference and Workshop Papers' :
-                        $('#volume').prop('disabled' , true);
-                        $('#number').prop('disabled' , true);
-                        $('#pages').prop('disabled' , false);
-                        $('#publisher').prop('disabled' , true);
+                        $('#volume').prop('disabled', true);
+                        $('#number').prop('disabled', true);
+                        $('#pages').prop('disabled', false);
+                        $('#publisher').prop('disabled', true);
                         break;
                     case 'Editorship' :
-                        $('#volume').prop('disabled' , false);
-                        $('#number').prop('disabled' , true);
-                        $('#pages').prop('disabled' , true);
-                        $('#publisher').prop('disabled' , false);
+                        $('#volume').prop('disabled', false);
+                        $('#number').prop('disabled', true);
+                        $('#pages').prop('disabled', true);
+                        $('#publisher').prop('disabled', false);
                         break;
                     case 'Parts in Books or Collections' :
-                        $('#volume').prop('disabled' , true);
-                        $('#number').prop('disabled' , true);
-                        $('#pages').prop('disabled' , false);
-                        $('#publisher').prop('disabled' , true);
+                        $('#volume').prop('disabled', true);
+                        $('#number').prop('disabled', true);
+                        $('#pages').prop('disabled', false);
+                        $('#publisher').prop('disabled', true);
                         break;
                     case 'Informal Publications' :
-                        $('#volume').prop('disabled' , false);
-                        $('#number').prop('disabled' , true);
-                        $('#pages').prop('disabled' , true);
-                        $('#publisher').prop('disabled' , true);
+                        $('#volume').prop('disabled', false);
+                        $('#number').prop('disabled', true);
+                        $('#pages').prop('disabled', true);
+                        $('#publisher').prop('disabled', true);
                         break;
                     case 'Books and Theses' :
-                        $('#volume').prop('disabled' , false);
-                        $('#number').prop('disabled' , true);
-                        $('#pages').prop('disabled' , true);
-                        $('#publisher').prop('disabled' , false);
+                        $('#volume').prop('disabled', false);
+                        $('#number').prop('disabled', true);
+                        $('#pages').prop('disabled', true);
+                        $('#publisher').prop('disabled', false);
                         break;
                 }
             });
 
 
-            $('#type').on('change' , function(){
-               switch($('#type').val()){
-                   case 'Journal Articles' :
-                       $('#volume').prop('disabled' , false);
-                       $('#number').prop('disabled' , false);
-                       $('#pages').prop('disabled' , false);
-                       $('#publisher').prop('disabled' , true);
-                       break;
-                   case 'Conference and Workshop Papers' :
-                       $('#volume').prop('disabled' , true);
-                       $('#number').prop('disabled' , true);
-                       $('#pages').prop('disabled' , false);
-                       $('#publisher').prop('disabled' , true);
-                       break;
-                   case 'Editorship' :
-                       $('#volume').prop('disabled' , false);
-                       $('#number').prop('disabled' , true);
-                       $('#pages').prop('disabled' , true);
-                       $('#publisher').prop('disabled' , false);
-                       break;
-                   case 'Parts in Books or Collections' :
-                       $('#volume').prop('disabled' , true);
-                       $('#number').prop('disabled' , true);
-                       $('#pages').prop('disabled' , false);
-                       $('#publisher').prop('disabled' , true);
-                       break;
-                   case 'Informal Publications' :
-                       $('#volume').prop('disabled' , false);
-                       $('#number').prop('disabled' , true);
-                       $('#pages').prop('disabled' , true);
-                       $('#publisher').prop('disabled' , true);
-                       break;
-                   case 'Books and Theses' :
-                       $('#volume').prop('disabled' , false);
-                       $('#number').prop('disabled' , true);
-                       $('#pages').prop('disabled' , true);
-                       $('#publisher').prop('disabled' , false);
-                       break;
-               }
+            $('#type').on('change', function () {
+                switch ($('#type').val()) {
+                    case 'Journal Articles' :
+                        $('#volume').prop('disabled', false);
+                        $('#number').prop('disabled', false);
+                        $('#pages').prop('disabled', false);
+                        $('#publisher').prop('disabled', true);
+                        break;
+                    case 'Conference and Workshop Papers' :
+                        $('#volume').prop('disabled', true);
+                        $('#number').prop('disabled', true);
+                        $('#pages').prop('disabled', false);
+                        $('#publisher').prop('disabled', true);
+                        break;
+                    case 'Editorship' :
+                        $('#volume').prop('disabled', false);
+                        $('#number').prop('disabled', true);
+                        $('#pages').prop('disabled', true);
+                        $('#publisher').prop('disabled', false);
+                        break;
+                    case 'Parts in Books or Collections' :
+                        $('#volume').prop('disabled', true);
+                        $('#number').prop('disabled', true);
+                        $('#pages').prop('disabled', false);
+                        $('#publisher').prop('disabled', true);
+                        break;
+                    case 'Informal Publications' :
+                        $('#volume').prop('disabled', false);
+                        $('#number').prop('disabled', true);
+                        $('#pages').prop('disabled', true);
+                        $('#publisher').prop('disabled', true);
+                        break;
+                    case 'Books and Theses' :
+                        $('#volume').prop('disabled', false);
+                        $('#number').prop('disabled', true);
+                        $('#pages').prop('disabled', true);
+                        $('#publisher').prop('disabled', false);
+                        break;
+                }
             });
-
-
 
 
         });

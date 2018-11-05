@@ -4,6 +4,14 @@
     <div class="container mt-3">
         <div class="row">
             <div class="col-md-8 offset-md-2 offset-lg-2">
+                @if(session('status'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('status') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a class="text-primary" href="{{ route('groups.show' , $groupId) }}">Back to group page</a></li>
@@ -35,16 +43,11 @@
                                     </div>
                                 </div>
 
-                                <form class="float-right" method="post" action="{{ route('groups.registration.notification.store') }}">
+                                <form class="float-right" method="post" action="{{ route('groups.users.invitation') }}">
                                     @csrf
                                     <input type="hidden" name="groupId" value="{{ $groupId }}">
                                     <input type="hidden" name="userId" value="{{ $users[$i]->id }}">
-                                    <input type="hidden" name="byUserId" value="{{ Auth::user()->id }}">
-                                    @if($pendings[$i] === false)
-                                        <button class="btn btn-primary" type="submit"><i class="fas fa-plus mr-2"></i>Invite</button>
-                                    @else
-                                        <button class="btn btn-primary" type="submit" disabled>Pending request</button>
-                                    @endif
+                                    <button class="btn btn-primary" type="submit"><i class="fas fa-plus mr-2"></i>Invite</button>
                                 </form>
                             </div>
                         </div>
@@ -62,3 +65,17 @@
         </div>
     </div>
 @endsection
+
+@push('body.scripts')
+    <script type="text/javascript">
+        $(document).ready(function (){
+
+            window.setTimeout(function () {
+                $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                    $(this).remove();
+                });
+            }, 4000);
+
+        })
+    </script>
+@endpush

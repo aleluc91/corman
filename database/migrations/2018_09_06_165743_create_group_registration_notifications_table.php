@@ -17,7 +17,6 @@ class CreateGroupRegistrationNotificationsTable extends Migration
             $table->increments('id');
             $table->integer('group_id');
             $table->integer('user_id');
-            $table->integer('by_user_id');
             $table->timestamps();
         });
     }
